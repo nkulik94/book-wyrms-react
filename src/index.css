@@ -19,14 +19,22 @@ header {
 
 #login {
   position: fixed;
-  top: 5px;
-  right: 5px;
+  top: 20px;
+  right: 20px;
 }
 
 #nav-bar {
   margin-top: 20px;
 }
 #login-form {
+  border: 1px solid black;
+  padding: 20px;
+  width: fit-content;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.account-form {
   border: 1px solid black;
   padding: 20px;
   width: fit-content;

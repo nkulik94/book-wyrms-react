@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
+import LoginButtons from "./LoginButtons";
 
 
 
@@ -8,7 +9,7 @@ function Header() {
         <header position="relative">
             <h1>Book Wyrm header</h1>
             <NavBar />
-        <span id="login"><button>Log In</button> or <button>Sign Up</button></span>
+            <LoginButtons />
         </header>
     )
 }

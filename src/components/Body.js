@@ -6,6 +6,7 @@ import FindBooks from "./FindBooks";
 import MyBooks from "./MyBooks";
 import Contact from "./Contact";
 import Login from "./LoginPage";
+import CreateAccount from "./CreateAccount";
 
 function Body() {
     return (
@@ -28,6 +29,9 @@ function Body() {
             </Route>
             <Route path="/login">
                 <Login />
+            </Route>
+            <Route path="/create-account">
+                <CreateAccount />
             </Route>
             </Switch>
         </div>
