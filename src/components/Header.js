@@ -1,16 +1,16 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import NavBar from "./NavBar";
 import LoginButtons from "./LoginButtons";
+import LogoutBtn from "./LogoutBtn";
 
 
 
-function Header( { currentUser } ) {
+function Header( { setCurrentUser, currentUser } ) {
     return (
         <header position="relative">
             <h1>Book Wyrm header</h1>
             <NavBar />
-            {currentUser ? <Button className="login-btns">Log Out</Button> : <LoginButtons />}
+            {currentUser ? <LogoutBtn setCurrentUser={setCurrentUser} /> : <LoginButtons />}
         </header>
     )
 }
