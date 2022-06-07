@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Body from './Body';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+    const [currentUser, setCurrentUser] = useState(null)
     return (
         <>
-        <Header />
-        <Body />
+        <Header currentUser={currentUser}/>
+        <Body setCurrentUser={setCurrentUser} />
         </>
     )
 }

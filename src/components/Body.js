@@ -8,7 +8,8 @@ import Contact from "./Contact";
 import Login from "./LoginPage";
 import CreateAccount from "./CreateAccount";
 
-function Body() {
+function Body( { setCurrentUser } ) {
+
     return (
         <div id="body">
             <Switch>
@@ -31,7 +32,7 @@ function Body() {
                 <Login />
             </Route>
             <Route path="/create-account">
-                <CreateAccount />
+                <CreateAccount setCurrentUser={setCurrentUser}/>
             </Route>
             </Switch>
         </div>
