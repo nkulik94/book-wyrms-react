@@ -10,7 +10,7 @@ function Header( { currentUser } ) {
         <header position="relative">
             <h1>Book Wyrm header</h1>
             <NavBar />
-            {currentUser ? <Button>Log Out</Button> : <LoginButtons />}
+            {currentUser ? <Button className="login-btns">Log Out</Button> : <LoginButtons />}
         </header>
     )
 }

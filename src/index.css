@@ -17,7 +17,7 @@ header {
   position: relative;
 }
 
-#login {
+.login-btns {
   position: fixed;
   top: 20px;
   right: 20px;

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 
-function CreateAccount( { setCurrentUser } ) {
-    const [allUsers, setUsers] = useState([])
+function CreateAccount( { setCurrentUser, allUsers, setUsers } ) {
     const [formData, setformData] = useState({
         name: '',
         username: '',
@@ -13,12 +12,6 @@ function CreateAccount( { setCurrentUser } ) {
     })
     const [displayError, setError] = useState(false)
     const history = useHistory()
-
-    useEffect(() => {
-        fetch('http://localhost:3000/users')
-            .then(r => r.json())
-            .then(data => setUsers(data))
-    }, [])
 
     function handleForm(e) {
         setformData({

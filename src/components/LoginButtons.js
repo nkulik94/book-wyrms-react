@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap'
 function LoginButtons() {
     const history = useHistory()
     return (
-        <span id="login"><Button variant="primary" onClick={() => history.push('/login')}>Log In</Button> or <Link to="/create-account">Sign up</Link></span>
+        <span className="login-btns" ><Button variant="primary" onClick={() => history.push('/login')}>Log In</Button> or <Link to="/create-account">Sign up</Link></span>
     )
 }
 
