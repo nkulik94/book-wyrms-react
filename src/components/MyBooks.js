@@ -1,7 +1,15 @@
 import React from 'react';
+import Login from './LoginPage';
 
-function MyBooks() {
-    return <h1>User books</h1>
+function MyBooks( { setCurrentUser, allUsers, currentUser } ) {
+    if (!currentUser) {
+        return (
+            <Login 
+                setCurrentUser={setCurrentUser}
+                allUsers={allUsers}
+            />
+        )
+    }
 }
 
 export default MyBooks

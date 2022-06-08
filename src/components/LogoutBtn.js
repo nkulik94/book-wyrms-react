@@ -8,7 +8,7 @@ function LogoutBtn( { setCurrentUser } ) {
     return (
         <Button className="login-btns" onClick={() => {
             setCurrentUser(null)
-            history.push('/login')
+            history.push('/my-books')
         }}>Log Out</Button>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 
-function CreateAccount( { setCurrentUser, allUsers, setUsers } ) {
+function CreateAccount( { setCurrentUser, allUsers, setUsers, currentUser } ) {
     const [formData, setformData] = useState({
         name: '',
         username: '',
@@ -12,6 +12,7 @@ function CreateAccount( { setCurrentUser, allUsers, setUsers } ) {
     })
     const [displayError, setError] = useState(false)
     const history = useHistory()
+    if (currentUser) history.goBack()
 
     function handleForm(e) {
         setformData({

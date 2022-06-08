@@ -9,7 +9,7 @@ function App() {
     return (
         <>
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-        <Body setCurrentUser={setCurrentUser} />
+        <Body setCurrentUser={setCurrentUser} currentUser={currentUser} />
         </>
     )
 }
