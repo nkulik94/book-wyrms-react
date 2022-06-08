@@ -15,7 +15,13 @@ function SearchForm( { setResults } ) {
         e.preventDefault()
         fetch(`http://openlibrary.org/search.json?${searchParams.param}=${searchParams.searchFor}&limit=10&page=1`)
             .then(r => r.json())
-            .then(data => setResults(data.docs))
+            .then(data => {
+                setResults(data.docs)
+                setSearch({
+                    param: 'title',
+                    searchFor: ''
+                })
+            })
     }
 
     return (

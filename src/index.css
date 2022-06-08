@@ -66,6 +66,7 @@ ul {
 }
 
 .book-card {
+  margin: 5px;
   text-align: center;
   width: 250px;
   border: 1px dashed black;

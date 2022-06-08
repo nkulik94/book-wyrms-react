@@ -9,6 +9,7 @@ import CreateAccount from "./CreateAccount";
 
 function Body( { setCurrentUser, currentUser } ) {
     const [allUsers, setUsers] = useState([])
+    const [currentBook, setCurrentBook] = useState(null)
 
     useEffect(() => {
         fetch('http://localhost:3000/users')
@@ -26,7 +27,7 @@ function Body( { setCurrentUser, currentUser } ) {
                 <About />
             </Route>
             <Route path="/bookfinder" >
-                <FindBooks />
+                <FindBooks currentBook={currentBook} setCurrentBook={setCurrentBook} />
             </Route>
             <Route path="/my-books">
                 <MyBooks 

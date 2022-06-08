@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
-import SearchResults from "./SearchResults";
+import BookList from "./BookList";
 
-function Search() {
+function Search( {setCurrentBook} ) {
     const [results, setResults] = useState([])
     const [fixedResults, setListToRender] = useState([])
 
@@ -14,8 +14,8 @@ function Search() {
                 cover: cover,
                 author: author,
                 title: book.title,
-                olKey: book.key,
-                coverEdition: book.cover_edition_key
+                //olKey: book.key,
+                coverEdition: book.cover_edition_key ? book.cover_edition_key : book.key
             }
         })
         setListToRender(fixedList)
@@ -24,7 +24,7 @@ function Search() {
     return (
         <div id="search">
             <SearchForm setResults={setResults} />
-            <SearchResults results={fixedResults} />
+            <BookList isSearchResult={true} results={fixedResults} setCurrentBook={setCurrentBook} />
         </div>
     )
 }

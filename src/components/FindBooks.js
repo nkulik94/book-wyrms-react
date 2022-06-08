@@ -1,9 +1,9 @@
 import React from 'react';
 import Search from './Search';
 
-function FindBooks() {
+function FindBooks( { currentBook, setCurrentBook } ) {
     return (
-        <Search />
+        <Search setCurrentBook={setCurrentBook} />
     )
 }
 
