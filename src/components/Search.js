@@ -15,7 +15,7 @@ function Search( {setCurrentBook} ) {
                 author: author,
                 title: book.title,
                 //olKey: book.key,
-                coverEdition: book.cover_edition_key ? book.cover_edition_key : book.key
+                coverEdition: book.cover_edition_key ? `/books/${book.cover_edition_key}` : book.key
             }
         })
         setListToRender(fixedList)
