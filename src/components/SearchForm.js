@@ -13,9 +13,9 @@ function SearchForm( { setResults } ) {
 
     function handleSearch(e) {
         e.preventDefault()
-        fetch(`http://openlibrary.org/search.json?${searchParams.param}=${searchParams.searchFor}&limit=10&page=3`)
+        fetch(`http://openlibrary.org/search.json?${searchParams.param}=${searchParams.searchFor}&limit=10&page=1`)
             .then(r => r.json())
-            .then(data => console.log(data))
+            .then(data => setResults(data.docs))
     }
 
     return (
