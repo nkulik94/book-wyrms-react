@@ -41,3 +41,20 @@ header {
   margin: auto;
   margin-top: 20px;
 }
+
+#search {
+  position: relative;
+  width: 40%;
+  margin-left: 2%;
+}
+
+#search-form {
+  position: absolute;
+  left: 0;
+}
+
+#search-btn {
+  margin-bottom: 0%;
+  position: absolute;
+  bottom: 20%;
+}
