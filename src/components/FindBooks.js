@@ -6,7 +6,7 @@ function FindBooks() {
     const [currentBook, setCurrentBook] = useState(null)
 
     return (
-        <div style={{position: 'relative'}}>
+        <div style={{position: "relative"}}>
             <Search setCurrentBook={setCurrentBook} />
             {currentBook ? <DetailedBook book={currentBook} /> : null}
         </div>

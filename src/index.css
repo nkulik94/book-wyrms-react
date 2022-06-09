@@ -18,7 +18,7 @@ header {
 }
 
 .login-btns {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
 }
@@ -48,9 +48,9 @@ header {
 
 #search {
   position: absolute;
+  left: 0;
   width: 40%;
   margin-left: 2%;
-  left: 0;
 }
 
 #search-form {
@@ -78,6 +78,11 @@ ul {
 #book-detail {
   position: absolute;
   right: 0;
-  border: 1px dashed lightgreen;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  width: 55%;
+  border: 3px dashed lightgreen;
+  background-color: khaki;
   overflow: auto;
 }

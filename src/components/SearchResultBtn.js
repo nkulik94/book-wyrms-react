@@ -12,14 +12,14 @@ function SearchResultBtn( { book, setCurrentBook } ) {
         const newBook = {
             ...book,
             olKey: book.coverEdition,
-            readBy: [],
-            wantToRead: [],
+            readBy: {},
+            wantToRead: {},
             rating: {
                 allRatings: [],
                 total: 'none',
                 average: 'none'
             },
-            reviews: []
+            reviews: {}
         }
         delete newBook.coverEdition
         fetch(`https://openlibrary.org${book.coverEdition}.json`)
