@@ -3,8 +3,7 @@ import SearchForm from "./SearchForm";
 import PageBtns from "./PageBtns";
 import BookList from "./BookList";
 
-function Search( {setCurrentBook} ) {
-    const [results, setResults] = useState(null)
+function Search( {setCurrentBook, results, setResults} ) {
     const [fixedResults, setListToRender] = useState([])
     //const [filterBy, setFilter] = useState('')
     const [currentPage, setPage] = useState({

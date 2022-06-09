@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 
-function Login( { setCurrentUser, allUsers } ) {
+function Login( { setCurrentUser, allUsers, currentUser } ) {
     const history = useHistory()
+    if (currentUser) history.goBack()
     const [formData, setFormdata] = useState({
         username: '',
         password: ''
@@ -25,7 +26,6 @@ function Login( { setCurrentUser, allUsers } ) {
                 .then(r => r.json())
                 .then(data => {
                     setCurrentUser(data)
-                    history.push('/my-books')
                     setFormdata({
                         username: '',
                         password: ''

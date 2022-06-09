@@ -2,7 +2,7 @@ import React from 'react'
 import ReviewList from './ReviewList'
 import DetailedBookBtns from './DetailedBookBtns'
 
-function DetailedBook( { book } ) {
+function DetailedBook( { book, currentUser } ) {
 
     const rating = book.rating.total === 'none' ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.allRatings.length} Book Wyrm(s)</p>
     return (
@@ -25,7 +25,7 @@ function DetailedBook( { book } ) {
             <br/>
             <p>This book has been read by {Object.keys(book.readBy).length} Book Wyrm(s), and {Object.keys(book.wantToRead).length} Book Wyrm(s) have put it on a wish list</p>
             <br/>
-            <DetailedBookBtns />
+            <DetailedBookBtns currentBook={book} currentUser={currentUser} />
             <br/>
             <ReviewList reviews={book.reviews} />
         </div>

@@ -6,8 +6,9 @@ import FindBooks from "./FindBooks";
 import MyBooks from "./MyBooks";
 import Contact from "./Contact";
 import CreateAccount from "./CreateAccount";
+import Login from "./LoginPage";
 
-function Body( { setCurrentUser, currentUser } ) {
+function Body( { setCurrentUser, currentUser, results, setResults } ) {
     const [allUsers, setUsers] = useState([])
 
     useEffect(() => {
@@ -26,7 +27,7 @@ function Body( { setCurrentUser, currentUser } ) {
                 <About />
             </Route>
             <Route path="/bookfinder" >
-                <FindBooks />
+                <FindBooks currentUser={currentUser} results={results} setResults={setResults} />
             </Route>
             <Route path="/my-books">
                 <MyBooks 
@@ -37,6 +38,13 @@ function Body( { setCurrentUser, currentUser } ) {
             </Route>
             <Route path="/contact">
                 <Contact />
+            </Route>
+            <Route path="/login">
+                <Login
+                    currentUser={currentUser}
+                    allUsers={allUsers}
+                    setCurrentUser={setCurrentUser}
+                />
             </Route>
             <Route path="/create-account">
                 <CreateAccount 
