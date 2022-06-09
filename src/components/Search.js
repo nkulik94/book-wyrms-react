@@ -8,6 +8,7 @@ function Search( {setCurrentBook} ) {
 
     useEffect(() => {
         const fixedList = results.map(book => {
+            if (!book.author_name) return null
             const cover = book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : null
             const author = book.author_name.length > 1 ? `${book.author_name[0]} and ${book.author_name.length - 1} others` : book.author_name[0]
             return {
@@ -24,7 +25,7 @@ function Search( {setCurrentBook} ) {
     return (
         <div id="search">
             <SearchForm setResults={setResults} />
-            <BookList isSearchResult={true} results={fixedResults} setCurrentBook={setCurrentBook} />
+            <BookList isSearchResult={true} results={fixedResults.slice(0, 10)} setCurrentBook={setCurrentBook} />
         </div>
     )
 }

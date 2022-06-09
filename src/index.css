@@ -42,15 +42,19 @@ header {
   margin-top: 20px;
 }
 
-#search {
+#body {
   position: relative;
+}
+
+#search {
+  position: absolute;
   width: 40%;
   margin-left: 2%;
+  left: 0;
 }
 
 #search-form {
-  position: absolute;
-  left: 0;
+  position: relative;
 }
 
 #search-btn {
@@ -60,8 +64,6 @@ header {
 }
 
 ul {
-  position: absolute;
-  top: 100px;
   list-style: none;
 }
 
