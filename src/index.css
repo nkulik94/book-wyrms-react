@@ -74,3 +74,10 @@ ul {
   border: 1px dashed black;
   padding: 2%;
 }
+
+#book-detail {
+  position: absolute;
+  right: 0;
+  border: 1px dashed lightgreen;
+  overflow: auto;
+}

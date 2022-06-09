@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Search from './Search';
+import DetailedBook from './DetailedBook';
 
-function FindBooks( { currentBook, setCurrentBook } ) {
+function FindBooks() {
+    const [currentBook, setCurrentBook] = useState(null)
+
     return (
-        <Search setCurrentBook={setCurrentBook} />
+        <div style={{position: 'relative'}}>
+            <Search setCurrentBook={setCurrentBook} />
+            {currentBook ? <DetailedBook book={currentBook} /> : null}
+        </div>
     )
 }
 
