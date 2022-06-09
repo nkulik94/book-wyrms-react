@@ -33,7 +33,7 @@ function PageBtns( { setPage, pageAmt, currentPage } ) {
 
     return (
         <Pagination>
-            {showNextPrevious ? <Pagination.Prev disabled={prevDisabled} onClick={() => handleNextPrev(false)} /> : null}
+            {showNextPrevious && !prevDisabled ? <Pagination.Prev onClick={() => handleNextPrev(false)} /> : null}
             {renderedPages.map(page => {
                 return (
                     <Pagination.Item
@@ -45,7 +45,7 @@ function PageBtns( { setPage, pageAmt, currentPage } ) {
                     </Pagination.Item>
                 )
             })}
-            {showNextPrevious ? <Pagination.Next disabled={nextDisabled} onClick={() => handleNextPrev(true)} /> : null}
+            {showNextPrevious && !nextDisabled ? <Pagination.Next onClick={() => handleNextPrev(true)} /> : null}
         </Pagination>
     )
 }
