@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
-function SearchForm( { setResults } ) {
+function SearchForm( { setResults, setPage } ) {
     const [searchParams, setSearch] = useState({
         param: 'title',
         searchFor: ''
@@ -17,6 +17,11 @@ function SearchForm( { setResults } ) {
             .then(r => r.json())
             .then(data => {
                 setResults(data.docs)
+                setPage({
+                    page: 1,
+                    start: 0,
+                    end: 10
+                })
                 setSearch({
                     param: 'title',
                     searchFor: ''

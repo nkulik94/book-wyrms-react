@@ -5,13 +5,17 @@ function BookList( { results, isSearchResult, setCurrentBook } ) {
     return (
         <>
             <ul>
-                {results.map(book => <BookCard
-                            book={book}
-                            key={book.coverEdition}
-                            isSearchResult={isSearchResult}
-                            setCurrentBook={setCurrentBook}
-                        />
-                    )}
+                {results.map(book => {
+                            return (
+                                <BookCard
+                                    book={book}
+                                    key={book.coverEdition}
+                                    isSearchResult={isSearchResult}
+                                    setCurrentBook={setCurrentBook}
+                                />
+                            )
+                    })
+                }
             </ul>
         </>
     )

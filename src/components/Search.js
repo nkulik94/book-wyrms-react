@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
-import PageBtns from "./PagesBtns";
+import PageBtns from "./PageBtns";
 import BookList from "./BookList";
 
 function Search( {setCurrentBook} ) {
     const [results, setResults] = useState(null)
     const [fixedResults, setListToRender] = useState([])
+    //const [filterBy, setFilter] = useState('')
     const [currentPage, setPage] = useState({
         page: 1,
         start: 0,
@@ -30,13 +31,15 @@ function Search( {setCurrentBook} ) {
         }
     }, [results])
 
+    const filteredList = fixedResults.filter(book => book)
+
     return (
         <div id="search">
-            <SearchForm setResults={setResults} />
-            {results ? <PageBtns setPage={setPage} pageAmt={Math.ceil(fixedResults.length / 10)} /> : null}
+            <SearchForm setResults={setResults} setPage={setPage} />
+            {results ? <PageBtns setPage={setPage} pageAmt={Math.ceil(filteredList.length / 10)} currentPage={currentPage} /> : null}
             <BookList
                 isSearchResult={true}
-                results={fixedResults.slice(currentPage.start, currentPage.end)}
+                results={filteredList.slice(currentPage.start, currentPage.end)}
                 setCurrentBook={setCurrentBook}
             />
         </div>
