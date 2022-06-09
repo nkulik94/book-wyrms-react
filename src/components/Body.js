@@ -8,8 +8,10 @@ import Contact from "./Contact";
 import CreateAccount from "./CreateAccount";
 import Login from "./LoginPage";
 
-function Body( { setCurrentUser, currentUser, results, setResults } ) {
+function Body( { setCurrentUser, currentUser } ) {
     const [allUsers, setUsers] = useState([])
+    const [results, setResults] = useState(null)
+    //const [currentBook, setCurrentBook] = useState(null)
 
     useEffect(() => {
         fetch('http://localhost:3000/users')
@@ -27,7 +29,11 @@ function Body( { setCurrentUser, currentUser, results, setResults } ) {
                 <About />
             </Route>
             <Route path="/bookfinder" >
-                <FindBooks currentUser={currentUser} results={results} setResults={setResults} />
+                <FindBooks
+                    currentUser={currentUser}
+                    results={results}
+                    setResults={setResults}
+                />
             </Route>
             <Route path="/my-books">
                 <MyBooks 

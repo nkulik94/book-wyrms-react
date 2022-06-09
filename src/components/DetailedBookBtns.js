@@ -1,22 +1,23 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 import RateDropdown from "./RateDropdown";
 import { ButtonGroup, Button } from "react-bootstrap";
 
 function DetailedBookBtns( {currentUser, currentBook} ) {
     const [error, setError] = useState(false)
+    if (currentUser) setError(false)
 
     const reviewBtn = <Button>Review</Button>
 
     function handleClick(e) {
         if (!currentUser) {
             setError(true)
-            setTimeout(() => setError(false), 3000)
         }
     }
 
     return (
         <>
-            {error ? <p>Please log in to complete this action</p> : null}
+            {error ? <p>Please <Link to="/login">log in</Link> to complete this action</p> : null}
             <ButtonGroup>
                 <Button
                     name="readList"

@@ -4,8 +4,8 @@ import DetailedBookBtns from './DetailedBookBtns'
 
 function DetailedBook( { book, currentUser } ) {
 
-    const rating = book.rating.total === 'none' ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.allRatings.length} Book Wyrm(s)</p>
-    return (
+    //const rating = && book.rating.total === 'none' ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.allRatings.length} Book Wyrm(s)</p>
+    if (book) return (
         <div id='book-detail'>
             <img src={book.cover} alt={book.title} style={{float: "left", marginRight: "10px"}} />
             <h2>{book.title}</h2>
@@ -21,7 +21,7 @@ function DetailedBook( { book, currentUser } ) {
                 {book.description}
             </p>
             <br/>
-            {rating}
+            {/* {rating} */}
             <br/>
             <p>This book has been read by {Object.keys(book.readBy).length} Book Wyrm(s), and {Object.keys(book.wantToRead).length} Book Wyrm(s) have put it on a wish list</p>
             <br/>

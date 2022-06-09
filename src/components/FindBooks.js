@@ -8,7 +8,7 @@ function FindBooks( { currentUser, results, setResults } ) {
     return (
         <div style={{position: "relative"}}>
             <Search setCurrentBook={setCurrentBook} results={results} setResults={setResults} />
-            {currentBook ? <DetailedBook book={currentBook} currentUser={currentUser} /> : null}
+            <DetailedBook book={currentBook} currentUser={currentUser} />
         </div>
     )
 }
