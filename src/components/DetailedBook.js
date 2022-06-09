@@ -1,5 +1,6 @@
 import React from 'react'
 import ReviewList from './ReviewList'
+import DetailedBookBtns from './DetailedBookBtns'
 
 function DetailedBook( { book } ) {
 
@@ -23,6 +24,8 @@ function DetailedBook( { book } ) {
             {rating}
             <br/>
             <p>This book has been read by {Object.keys(book.readBy).length} Book Wyrm(s), and {Object.keys(book.wantToRead).length} Book Wyrm(s) have put it on a wish list</p>
+            <br/>
+            <DetailedBookBtns />
             <br/>
             <ReviewList reviews={book.reviews} />
         </div>
