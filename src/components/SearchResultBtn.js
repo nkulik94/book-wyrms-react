@@ -1,7 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Button } from 'react-bootstrap'
 
 function SearchResultBtn( { book, setCurrentBook } ) {
+    const history = useHistory()
+
     function handleClick() {
         fetch(`https://book-wyrm-api.herokuapp.com/books?olKey=${book.coverEdition}`)
             .then(r => r.json())

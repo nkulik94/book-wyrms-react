@@ -5,12 +5,17 @@ import { ButtonGroup, Button } from "react-bootstrap";
 
 function DetailedBookBtns( {currentUser, currentBook, setCurrentUser, setCurrentBook} ) {
     const [error, setError] = useState(false)
+    const [rated, setRated] = useState(false)
     
     useEffect(() => {
         setError(false)
     }, [currentBook, currentUser])
 
-    const reviewBtn = <Button>Review</Button>
+    useEffect(() => {
+        if (currentUser) {
+            currentUser.readList[currentBook.id] && currentUser.readList[currentBook.id].ownRating ? setRated(true) : setRated(false)
+        }
+    }, [currentBook, currentUser])
 
     function handleClick(e) {
         if (!currentUser) {
@@ -44,6 +49,8 @@ function DetailedBookBtns( {currentUser, currentBook, setCurrentUser, setCurrent
         }
     }
 
+    const reviewBtn = <Button>Review</Button>
+
     return (
         <>
             {error ? <p>Please <Link to="/login">log in</Link> to complete this action</p> : null}
@@ -62,8 +69,9 @@ function DetailedBookBtns( {currentUser, currentBook, setCurrentUser, setCurrent
                 >
                     Add to Wish list
                 </Button>
-                <RateDropdown />
+                {rated ? reviewBtn : <RateDropdown />}
             </ButtonGroup>
+            {rated ? null : <p>Please rate this book if you'd like to leave a review</p>}
         </>
     )
 }
