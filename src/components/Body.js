@@ -14,7 +14,7 @@ function Body( { setCurrentUser, currentUser } ) {
     const [currentBook, setCurrentBook] = useState(null)
 
     useEffect(() => {
-        fetch('http://localhost:3000/users')
+        fetch('https://book-wyrm-api.herokuapp.com/users')
             .then(r => r.json())
             .then(data => setUsers(data))
     }, [])

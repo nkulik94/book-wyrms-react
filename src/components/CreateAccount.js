@@ -35,7 +35,7 @@ function CreateAccount( { setCurrentUser, allUsers, setUsers, currentUser } ) {
             setError(true)
             setTimeout(() => setError(false), 3000)
         } else {
-            fetch('http://localhost:3000/users', config)
+            fetch('https://book-wyrm-api.herokuapp.com/users', config)
                 .then(r => r.json())
                 .then(data => {
                     setCurrentUser(data)

@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 
 function SearchResultBtn( { book, setCurrentBook } ) {
     function handleClick() {
-        fetch(`http://localhost:3000/books?olKey=${book.coverEdition}`)
+        fetch(`https://book-wyrm-api.herokuapp.com/books?olKey=${book.coverEdition}`)
             .then(r => r.json())
             .then(data => data.length > 0 ? setCurrentBook(data[0]) : handleNoResponse())
     }
@@ -35,13 +35,13 @@ function SearchResultBtn( { book, setCurrentBook } ) {
                     newBook.series = Array.isArray(data.series) ? data.series[0] : data.series
                 }
                 const config = {
-                    method: 'Post',
+                    method: 'POST',
                     headers: {
                         "Content-type": "application/json"
                     },
                     body: JSON.stringify(newBook)
                 }
-                fetch('http://localhost:3000/books', config)
+                fetch('https://book-wyrm-api.herokuapp.com/books', config)
                     .then(r => r.json())
                     .then(res => setCurrentBook(res))
             })

@@ -22,7 +22,7 @@ function Login( { setCurrentUser, allUsers, currentUser } ) {
             setError(true)
             setTimeout(() => setError(false), 3000)
         } else {
-            fetch(`http://localhost:3000/users/${rightUser.id}`)
+            fetch(`https://book-wyrm-api.herokuapp.com/users/${rightUser.id}`)
                 .then(r => r.json())
                 .then(data => {
                     setCurrentUser(data)
