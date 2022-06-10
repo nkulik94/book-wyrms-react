@@ -35,6 +35,7 @@ function Body( { setCurrentUser, currentUser } ) {
                     setResults={setResults}
                     currentBook={currentBook}
                     setCurrentBook={setCurrentBook}
+                    setCurrentUser={setCurrentUser}
                 />
             </Route>
             <Route path="/my-books">

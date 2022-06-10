@@ -7,8 +7,8 @@ function CreateAccount( { setCurrentUser, allUsers, setUsers, currentUser } ) {
         name: '',
         username: '',
         password: '',
-        readList: [],
-        wishList: []
+        readList: {},
+        wishList: {}
     })
     const [displayError, setError] = useState(false)
     const history = useHistory()
@@ -40,7 +40,6 @@ function CreateAccount( { setCurrentUser, allUsers, setUsers, currentUser } ) {
                 .then(data => {
                     setCurrentUser(data)
                     setUsers([...allUsers, data])
-                    history.push('/my-books')
                 })
         }
     }

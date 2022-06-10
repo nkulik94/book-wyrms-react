@@ -12,13 +12,14 @@ function SearchResultBtn( { book, setCurrentBook } ) {
         const newBook = {
             ...book,
             olKey: book.coverEdition,
-            readBy: {},
-            wantToRead: {},
+            readList: {},
+            wishList: {},
             rating: {
                 allRatings: [],
                 total: 'none',
                 average: 'none'
             },
+            hasReviews: false,
             reviews: {}
         }
         delete newBook.coverEdition
