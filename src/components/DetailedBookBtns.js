@@ -37,7 +37,7 @@ function DetailedBookBtns( {currentUser, currentBook, setReviewForm, handleClick
                 >
                     Add to Wish list
                 </Button>
-                {rated ? reviewBtn : <RateDropdown />}
+                {rated ? reviewBtn : <RateDropdown handleClick={handleClick} />}
             </ButtonGroup>
             {rated ? null : <p>Please rate this book if you'd like to leave a review</p>}
         </>

@@ -20,15 +20,28 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
         .then(data => callback(data))
     }
 
-    function handleLists(e) {
+    function handleRatings(rating) {
+        handleLists('readList')
+        currentUser.readList[book.id].ownRating = rating
+        book.rating.allRatings.push(rating)
+        book.rating.total = book.rating.total === 'none' ? rating : rating + book.rating.total
+        book.rating.average =  Math.round((book.rating.total / book.rating.allRatings.length) * 10) / 10
+    }
+
+    function handleLists(list) {
+        currentUser[list][book.id] = {
+                    cover: book.cover,
+                    title: book.title,
+                    author: book.author
+                }
+                book[list][currentUser.id] = currentUser.id
+    }
+    
+    function handleBtns(e) {
         if (currentUser.wishList[book.id]) delete currentUser.wishList[book.id]
         if (book.wishList[currentUser.id]) delete book.wishList[currentUser.id]
-        currentUser[e.target.name][book.id] = {
-            cover: book.cover,
-            title: book.title,
-            author: book.author
-        }
-        book[e.target.name][currentUser.id] = currentUser.id
+        
+        e.target.name === 'rate-btn' ? handleRatings(parseInt(e.target.value, 10)) : handleLists(e.target.name)
         
         handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
         handleRequest(book, `books/${book.id}`, setCurrentBook)
@@ -58,7 +71,7 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
             <DetailedBookBtns
                 currentBook={book}
                 currentUser={currentUser}
-                handleClick={handleLists}
+                handleClick={handleBtns}
                 setReviewForm={setReviewForm}
             />
             <br/>
