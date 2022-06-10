@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import RateDropdown from "./RateDropdown";
 import { ButtonGroup, Button } from "react-bootstrap";
 
 function DetailedBookBtns( {currentUser, currentBook} ) {
     const [error, setError] = useState(false)
-    if (currentUser) setError(false)
+    
+    useEffect(() => {
+        if (currentUser) setError(false)
+    }, [])
 
     const reviewBtn = <Button>Review</Button>
 

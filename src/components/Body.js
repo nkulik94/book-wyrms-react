@@ -11,7 +11,7 @@ import Login from "./LoginPage";
 function Body( { setCurrentUser, currentUser } ) {
     const [allUsers, setUsers] = useState([])
     const [results, setResults] = useState(null)
-    //const [currentBook, setCurrentBook] = useState(null)
+    const [currentBook, setCurrentBook] = useState(null)
 
     useEffect(() => {
         fetch('http://localhost:3000/users')
@@ -33,6 +33,8 @@ function Body( { setCurrentUser, currentUser } ) {
                     currentUser={currentUser}
                     results={results}
                     setResults={setResults}
+                    currentBook={currentBook}
+                    setCurrentBook={setCurrentBook}
                 />
             </Route>
             <Route path="/my-books">

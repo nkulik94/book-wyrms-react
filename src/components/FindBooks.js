@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import Search from './Search';
 import DetailedBook from './DetailedBook';
 
-function FindBooks( { currentUser, results, setResults } ) {
-    const [currentBook, setCurrentBook] = useState(null)
+function FindBooks( { currentUser, results, setResults, currentBook, setCurrentBook } ) {
 
     return (
         <div style={{position: "relative"}}>
             <Search setCurrentBook={setCurrentBook} results={results} setResults={setResults} />
-            <DetailedBook book={currentBook} currentUser={currentUser} />
+            {currentBook ? <DetailedBook book={currentBook} currentUser={currentUser} /> : null}
         </div>
     )
 }
