@@ -17,9 +17,11 @@ function DetailedBookBtns( {currentUser, currentBook, setCurrentUser, setCurrent
             setError(true)
         } else {
             if (currentUser.wishList[currentBook.id]) delete currentUser.wishList[currentBook.id]
+            if (currentBook.wishList[currentUser.id]) delete currentBook.wishList[currentUser.id]
             currentUser[e.target.name][currentBook.id] = {
                 cover: currentBook.cover,
                 title: currentBook.title,
+                author: currentBook.author
             }
             currentBook[e.target.name][currentUser.id] = currentUser.id
 
@@ -34,10 +36,7 @@ function DetailedBookBtns( {currentUser, currentBook, setCurrentUser, setCurrent
 
                 fetch(`https://book-wyrm-api.herokuapp.com/${resource}`, config)
                 .then(r => r.json())
-                .then(data => {
-                    console.log(data)
-                    callback(data)
-                })
+                .then(data => callback(data))
             }
             
             handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
@@ -58,7 +57,7 @@ function DetailedBookBtns( {currentUser, currentBook, setCurrentUser, setCurrent
                 </Button>
                 <Button
                     name="wishList"
-                    disabled={currentUser && currentUser.wishList[currentBook.id]}
+                    disabled={currentUser && (currentUser.wishList[currentBook.id] || currentUser.readList[currentBook.id])}
                     onClick={handleClick}
                 >
                     Add to Wish list
