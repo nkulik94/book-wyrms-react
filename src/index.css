@@ -46,7 +46,7 @@ header {
   position: relative;
 }
 
-#search {
+.list {
   position: absolute;
   left: 0;
   width: 40%;

@@ -22,7 +22,6 @@ function Search( {setCurrentBook, results, setResults} ) {
                     cover: cover,
                     author: author,
                     title: book.title,
-                    //olKey: book.key,
                     coverEdition: book.cover_edition_key ? `/books/${book.cover_edition_key}` : book.key
                 }
             })
@@ -33,7 +32,7 @@ function Search( {setCurrentBook, results, setResults} ) {
     const filteredList = fixedResults.filter(book => book)
 
     return (
-        <div id="search">
+        <div className="list">
             <SearchForm setResults={setResults} setPage={setPage} />
             {results ? <PageBtns setPage={setPage} pageAmt={Math.ceil(filteredList.length / 10)} currentPage={currentPage} /> : null}
             <BookList
