@@ -6,18 +6,19 @@ import { ButtonGroup, Button } from "react-bootstrap";
 function DetailedBookBtns( {currentUser, currentBook, setReviewForm, handleClick } ) {
     const [error, setError] = useState(false)
     const [rated, setRated] = useState(false)
+    const [reviewed, setReviewed] = useState(false)
+    //const [disabledRateBtn, setDisabledRateBtn] = useState(false)
     
     useEffect(() => {
         setError(false)
-    }, [currentBook, currentUser])
-
-    useEffect(() => {
         if (currentUser) {
-            currentUser.readList[currentBook.id] && currentUser.readList[currentBook.id].ownRating ? setRated(true) : setRated(false)
+            currentBook.readList[currentUser.id] && currentUser.readList[currentBook.id].ownRating ? setRated(true) : setRated(false)
+            currentBook.readList[currentUser.id] && currentUser.readList[currentBook.id].review ? setReviewed(true) : setReviewed(false)
         }
     }, [currentBook, currentUser])
 
-    const reviewBtn = <Button disabled={rated && currentUser.readList[currentBook.id].review} onClick={() => setReviewForm(true)}>Review</Button>
+
+    //const reviewBtn = <Button disabled={rated && currentUser[currentBook.id].review} onClick={() => setReviewForm(true)}>Review</Button>
 
     return (
         <>
@@ -37,7 +38,7 @@ function DetailedBookBtns( {currentUser, currentBook, setReviewForm, handleClick
                 >
                     Add to Wish list
                 </Button>
-                {rated ? reviewBtn : <RateDropdown handleClick={handleClick} />}
+                {rated ? <Button disabled={reviewed} onClick={() => setReviewForm(true)}>Review</Button> : <RateDropdown handleClick={handleClick} />}
             </ButtonGroup>
             {rated ? null : <p>Please rate this book if you'd like to leave a review</p>}
         </>
