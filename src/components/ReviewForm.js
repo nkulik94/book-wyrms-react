@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Button, Form } from 'react-bootstrap';
 
-function ReviewForm() {
+function ReviewForm( { onReview } ) {
     const [formData, setFormData] = useState('')
     
     return (
-        <Form>
+        <Form onSubmit={e => {
+            e.preventDefault()
+            onReview(formData)
+        }}>
             <Form.Group className="mb-3" controlId="formBasicTextarea">
                 <Form.Label>Leave a review</Form.Label>
                 <Form.Control type="textarea" value={formData} onChange={e => setFormData(e.target.value)} />

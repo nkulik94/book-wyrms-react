@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 
 function ReviewCard( {review} ) {
     return (
-        <li>
+        <li style={{margin: '10px'}}>
             <Card>
                 <Card.Header>{review.user} @{review.username}</Card.Header>
                 <Card.Body>

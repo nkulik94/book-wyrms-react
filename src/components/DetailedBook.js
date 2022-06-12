@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import ReviewForm from './ReviewForm'
 import ReviewList from './ReviewList'
 import DetailedBookBtns from './DetailedBookBtns'
 
 function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
     const [displayReviewForm, setReviewForm] = useState(false)
+    const [error, setError] = useState(false)
+
+    useEffect(() => {
+        setError(false)
+    }, [book, currentUser])
 
     function handleRequest(obj, resource, callback) {
         const config = {
@@ -28,6 +34,25 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
         book.rating.average =  Math.round((book.rating.total / book.rating.allRatings.length) * 10) / 10
     }
 
+    function handleReviews(review) {
+        if (!currentUser) {
+            setError(true)
+        } else {
+            currentUser.readList[book.id].review = review
+            book.hasReviews = true
+            book.reviews[currentUser.id] = {
+                user: currentUser.name,
+                username: currentUser.username,
+                content: review,
+                rating: currentUser.readList[book.id].ownRating
+            }
+            setReviewForm(false)
+            
+            handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
+            handleRequest(book, `books/${book.id}`, setCurrentBook)
+        }
+    }
+
     function handleLists(list) {
         currentUser[list][book.id] = {
                     cover: book.cover,
@@ -38,13 +63,17 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
     }
     
     function handleBtns(e) {
-        if (currentUser.wishList[book.id]) delete currentUser.wishList[book.id]
-        if (book.wishList[currentUser.id]) delete book.wishList[currentUser.id]
-        
-        e.target.name === 'rate-btn' ? handleRatings(parseInt(e.target.value, 10)) : handleLists(e.target.name)
-        
-        handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
-        handleRequest(book, `books/${book.id}`, setCurrentBook)
+        if (!currentUser) {
+            setError(true)
+        } else {
+            if (currentUser.wishList[book.id]) delete currentUser.wishList[book.id]
+            if (book.wishList[currentUser.id]) delete book.wishList[currentUser.id]
+            
+            e.target.name === 'rate-btn' ? handleRatings(parseInt(e.target.value, 10)) : handleLists(e.target.name)
+            
+            handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
+            handleRequest(book, `books/${book.id}`, setCurrentBook)
+        }
     }
 
     const rating = book.rating.total === 'none' ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.allRatings.length} Book Wyrm(s)</p>
@@ -68,6 +97,8 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
             <br/>
             <p>This book has been read by {Object.keys(book.readList).length} Book Wyrm(s), and {Object.keys(book.wishList).length} Book Wyrm(s) have put it on a wish list</p>
             <br/>
+            {error ? <p>Please <Link to="/login">log in</Link> to complete this action</p> : null}
+            <br />
             <DetailedBookBtns
                 currentBook={book}
                 currentUser={currentUser}
@@ -75,7 +106,7 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
                 setReviewForm={setReviewForm}
             />
             <br/>
-            {displayReviewForm ? <ReviewForm /> : null}
+            {displayReviewForm ? <ReviewForm onReview={handleReviews} /> : null}
             <br/>
             {book.hasReviews ? <ReviewList reviews={book.reviews} /> : null}
         </div>
