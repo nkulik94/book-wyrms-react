@@ -57,7 +57,8 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
         currentUser[list][book.id] = {
                     cover: book.cover,
                     title: book.title,
-                    author: book.author
+                    author: book.author,
+                    id: book.id
                 }
                 book[list][currentUser.id] = currentUser.id
     }

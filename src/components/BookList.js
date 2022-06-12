@@ -1,15 +1,15 @@
 import React from "react";
 import BookCard from "./BookCard";
 
-function BookList( { results, isSearchResult, setCurrentBook } ) {
+function BookList( { books, isSearchResult, setCurrentBook, keyName } ) {
     return (
         <>
             <ul>
-                {results.map(book => {
+                {books.map(book => {
                             return (
                                 <BookCard
                                     book={book}
-                                    key={book.coverEdition}
+                                    key={book[keyName]}
                                     isSearchResult={isSearchResult}
                                     setCurrentBook={setCurrentBook}
                                 />

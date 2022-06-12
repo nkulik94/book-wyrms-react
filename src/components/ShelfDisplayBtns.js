@@ -4,7 +4,7 @@ import { ButtonGroup, Button } from 'react-bootstrap'
 function ShelfDisplayBtns( {readDisabled, setReadDisabled} ) {
 
     return (
-        <ButtonGroup>
+        <ButtonGroup style={{margin: '10px'}}>
             <Button variant="primary" disabled={readDisabled} onClick={() => setReadDisabled(true)} >Read List</Button>
             <Button variant="primary" disabled={!readDisabled} onClick={() => setReadDisabled(false)}>Wish List</Button>
         </ButtonGroup>

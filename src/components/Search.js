@@ -37,8 +37,9 @@ function Search( {setCurrentBook, results, setResults} ) {
             {results ? <PageBtns setPage={setPage} pageAmt={Math.ceil(filteredList.length / 10)} currentPage={currentPage} /> : null}
             <BookList
                 isSearchResult={true}
-                results={filteredList.slice(currentPage.start, currentPage.end)}
+                books={filteredList.slice(currentPage.start, currentPage.end)}
                 setCurrentBook={setCurrentBook}
+                key={'coverEdition'}
             />
         </div>
     )
