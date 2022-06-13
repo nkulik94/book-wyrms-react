@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PageBtns from './PageBtns';
 import BookList from './BookList';
 
-function UserList( { list } ) {
+function UserList( { list, listType } ) {
     const [currentPage, setPage] = useState({
         page: 1,
         start: 0,
@@ -17,7 +17,7 @@ function UserList( { list } ) {
     return (
         <>
             <PageBtns pageAmt={pageAmt} setPage={setPage} currentPage={currentPage} />
-            <BookList books={booksArr} isSearchResult={false} keyName={'cover'} />
+            <BookList books={booksArr} isSearchResult={false} keyName={'cover'} listType={listType} />
         </>
     )
 }

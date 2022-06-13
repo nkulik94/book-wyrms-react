@@ -21,7 +21,7 @@ function MyBooks( { setCurrentUser, currentUser } ) {
     return (
         <div className='list'>
             <ShelfDisplayBtns readDisabled={readDisabled} setReadDisabled={setReadDisabled} />
-            <UserList list={readDisabled ? currentUser.readList : currentUser.wishList} />
+            <UserList list={readDisabled ? currentUser.readList : currentUser.wishList} listType={readDisabled ? 'readList' : 'wishList'} />
         </div>
     )
 }

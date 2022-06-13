@@ -1,9 +1,10 @@
 import React from 'react';
 import SearchResultBtn from './SearchResultBtn';
+import UserListItems from './UserListItems';
 
-function BookCard( { book, isSearchResult, setCurrentBook } ) {
+function BookCard( { book, isSearchResult, setCurrentBook, listType } ) {
     const cover = book.cover ? <img src={book.cover} alt={book.title}/> : <h4>There is no cover available for this book</h4>
-    const buttons = isSearchResult ? <SearchResultBtn book={book} setCurrentBook={setCurrentBook} /> : null
+    const buttons = isSearchResult ? <SearchResultBtn book={book} setCurrentBook={setCurrentBook} /> : <UserListItems book={book} listType={listType} />
 
     return (
         <li className='book-card'>
