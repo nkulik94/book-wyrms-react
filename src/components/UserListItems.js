@@ -14,14 +14,14 @@ function UserListItems( { book } ) {
 
     const seeMore = <Button onClick={() => handleSeeMore(book.id)} >See more</Button>
 
-    if (book.list === 'readList') {
-        return <ReadListBtns
-            book={book}
-            seeMore={seeMore}
-        />
-    }
+    const buttons = book.list === 'readList' ? <ReadListBtns book={book} /> : null
 
-    return <>{seeMore}</>
+    return (
+        <>
+        {buttons}
+        {seeMore}
+        </>
+    )
 }
 
 export default UserListItems

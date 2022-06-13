@@ -3,8 +3,9 @@ import { UserContext } from "../context/user";
 import { BookContext } from "../context/book";
 import { Card } from "react-bootstrap";
 import ReadListReviewCard from "./ReadListReviewCard";
+import ReadListUnrated from "./ReadListUnrated";
 
-function ReadListBtns( { book, seeMore } ) {
+function ReadListBtns( { book } ) {
     const [displayForm, setForm] = useState(false)
 
     const setCurrentBook = useContext(BookContext).setBook
@@ -12,23 +13,7 @@ function ReadListBtns( { book, seeMore } ) {
     const setCurrentUser = useContext(UserContext).setUser
     
 
-    if (!book.review && !book.ownRating) {
-        return (
-            <>
-            <p>Rating: You have not yet rated this book</p>
-            {seeMore}
-            </>
-        )
-    } else if (book.ownRating && !book.review) {
-        return (
-            <>
-            <p>Your Rating: {book.ownRating} out of 5</p>
-            {seeMore}
-            </>
-        )
-    }
-
-    function handleRequest(obj, resource, callback) {
+    function handlePatch(obj, resource, callback) {
         const config = {
             method: "PATCH",
             headers: {
@@ -44,14 +29,39 @@ function ReadListBtns( { book, seeMore } ) {
 
     function handleDeleteReview() {
         delete currentUser.readList[book.id].review
-        handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
+        handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
         fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
                 delete book.reviews[currentUser.id]
                 if (Object.keys(book.reviews).length === 0) book.hasReviews = false
-                handleRequest(book, `books/${book.id}`, setCurrentBook)
+                handlePatch(book, `books/${book.id}`, setCurrentBook)
             })
+    }
+
+    function handleRate(e) {
+        const difference = parseInt(e.target.value, 10) - currentUser.readList[book.id].ownRating
+        currentUser.readList[book.id].ownRating = parseInt(e.target.value, 10)
+        handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
+        console.log(difference)
+        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+            .then(r => r.json())
+            .then(book => {
+                book.rating.total += difference
+                handlePatch(book, `books/${book.id}`, setCurrentBook)
+            })
+    }
+
+    if (!book.review && !book.ownRating) {
+        return (
+            <ReadListUnrated />
+        )
+    } else if (book.ownRating && !book.review) {
+        return (
+            <>
+            <p>Your Rating: {book.ownRating} out of 5</p>
+            </>
+        )
     }
 
     return (
@@ -62,7 +72,6 @@ function ReadListBtns( { book, seeMore } ) {
                 <ReadListReviewCard book={book} onDeleteReview={handleDeleteReview} setForm={setForm} />
             </Card.Body>
         </Card>
-        {seeMore}
         </>
     )
 }
