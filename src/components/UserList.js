@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PageBtns from './PageBtns';
 import BookList from './BookList';
 
-function UserList( { list, setCurrentBook, currentUser, setCurrentUser } ) {
+function UserList( { list } ) {
     const [currentPage, setPage] = useState({
         page: 1,
         start: 0,
@@ -19,11 +19,8 @@ function UserList( { list, setCurrentBook, currentUser, setCurrentUser } ) {
             <PageBtns pageAmt={pageAmt} setPage={setPage} currentPage={currentPage} />
             <BookList
                 books={booksArr.slice(currentPage.start, currentPage.end)}
-                isSearchResult={false} keyName={'cover'}
-                setCurrentBook={setCurrentBook}
-                currentUser={currentUser}
-                setCurrentUser={setCurrentUser}
-
+                isSearchResult={false}
+                keyName={'cover'}
             />
         </>
     )

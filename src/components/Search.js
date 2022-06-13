@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { BookContext  } from "../context/book";
 import SearchForm from "./SearchForm";
 import PageBtns from "./PageBtns";
 import BookList from "./BookList";
 
-function Search( {setCurrentBook, results, setResults} ) {
+function Search( { results, setResults} ) {
     const [fixedResults, setListToRender] = useState([])
     //const [filterBy, setFilter] = useState('')
     const [currentPage, setPage] = useState({
@@ -11,6 +12,8 @@ function Search( {setCurrentBook, results, setResults} ) {
         start: 0,
         end: 10
     })
+
+    const setCurrentBook = useContext(BookContext).setBook
 
     useEffect(() => {
         if (results) {

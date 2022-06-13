@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { BookContext } from '../context/book'
+import { UserContext } from '../context/user'
 import RateDropdown from "./RateDropdown";
 import { ButtonGroup, Button } from "react-bootstrap";
 
-function DetailedBookBtns( {currentUser, currentBook, setReviewForm, handleClick, setError } ) {
+function DetailedBookBtns( { setReviewForm, handleClick } ) {
+    const currentBook = useContext(BookContext).book
+    const currentUser = useContext(UserContext).user
 
     const [rated, setRated] = useState(false)
     const [reviewed, setReviewed] = useState(false)

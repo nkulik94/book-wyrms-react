@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/user";
+import { BookContext } from "../context/book";
 import ReviewBtns from "./ReviewBtns";
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 
-function ReadListBtns( {book, setCurrentBook, currentUser, setCurrentUser, seeMore } ) {
+function ReadListBtns( { book, seeMore } ) {
     const [displayForm, setForm] = useState(false)
+
+    const setCurrentBook = useContext(BookContext).setBook
+    const currentUser = useContext(UserContext).user
+    const setCurrentUser = useContext(UserContext).setUser
     
-
-    // function handleSeeMore(id) {
-    //     fetch(`https://book-wyrm-api.herokuapp.com/books/${id}`)
-    //         .then(r => r.json())
-    //         .then(data => setCurrentBook(data))
-    // }
-
-    // const seeMore = <Button onClick={() => handleSeeMore(book.id)} >See more</Button>
 
     if (!book.review && !book.ownRating) {
         return (

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { BookContext  } from "../context/book";
 import Search from './Search';
 import DetailedBook from './DetailedBook';
 
-function FindBooks( { currentUser, results, setResults, currentBook, setCurrentBook, setCurrentUser } ) {
+function FindBooks( { results, setResults} ) {
+    const currentBook = useContext(BookContext)
 
     return (
         <div style={{position: "relative"}}>
-            <Search setCurrentBook={setCurrentBook} results={results} setResults={setResults} />
-            {currentBook ? <DetailedBook book={currentBook} currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentBook={setCurrentBook} /> : null}
+            <Search results={results} setResults={setResults} />
+            {currentBook.book ? <DetailedBook /> : null}
         </div>
     )
 }

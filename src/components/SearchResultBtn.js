@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BookContext  } from "../context/book";
 import { useHistory } from "react-router-dom";
 import { Button } from 'react-bootstrap'
 
-function SearchResultBtn( { book, setCurrentBook } ) {
+function SearchResultBtn( { book } ) {
     const history = useHistory()
+    const setCurrentBook = useContext(BookContext).setBook
 
     function handleClick() {
         fetch(`https://book-wyrm-api.herokuapp.com/books?olKey=${book.coverEdition}`)

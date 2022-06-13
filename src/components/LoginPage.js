@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../context/user';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 
-function Login( { setCurrentUser, allUsers, currentUser } ) {
+function Login( {allUsers} ) {
     const history = useHistory()
-    if (currentUser) history.goBack()
+    const currentUser = useContext(UserContext)
+    
+    if (currentUser.user) history.goBack()
+    
     const [formData, setFormdata] = useState({
         username: '',
         password: ''
@@ -25,7 +29,7 @@ function Login( { setCurrentUser, allUsers, currentUser } ) {
             fetch(`https://book-wyrm-api.herokuapp.com/users/${rightUser.id}`)
                 .then(r => r.json())
                 .then(data => {
-                    setCurrentUser(data)
+                    currentUser.setUser(data)
                     setFormdata({
                         username: '',
                         password: ''

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../context/user';
 import ShelfDisplayBtns from './ShelfDisplayBtns';
 import UserList from './UserList';
 
-function MyBookList( {currentUser, setCurrentBook, setCurrentUser} ) {
+function MyBookList() {
     const [readDisabled, setReadDisabled] = useState(true)
     const [readList, updateReadlist] = useState({})
     const [wishList, updateWishlist] = useState({})
+
+    const currentUser = useContext(UserContext).user
 
     useEffect(() => {
         updateReadlist(currentUser.readList)
@@ -15,7 +18,7 @@ function MyBookList( {currentUser, setCurrentBook, setCurrentUser} ) {
     return (
         <div className='list'>
             <ShelfDisplayBtns readDisabled={readDisabled} setReadDisabled={setReadDisabled} />
-            <UserList list={readDisabled ? readList : wishList} setCurrentBook={setCurrentBook} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <UserList list={readDisabled ? readList : wishList} />
         </div>
     )
 }

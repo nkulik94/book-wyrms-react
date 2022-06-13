@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../context/user';
 import { Form, Button } from 'react-bootstrap'
 
-function CreateAccount( { setCurrentUser, allUsers, setUsers, currentUser } ) {
+function CreateAccount( {allUsers, setUsers} ) {
     const [formData, setformData] = useState({
         name: '',
         username: '',
@@ -12,7 +13,10 @@ function CreateAccount( { setCurrentUser, allUsers, setUsers, currentUser } ) {
     })
     const [displayError, setError] = useState(false)
     const history = useHistory()
-    if (currentUser) history.goBack()
+
+    const currentUser = useContext(UserContext)
+
+    if (currentUser.user) history.goBack()
 
     function handleForm(e) {
         setformData({
@@ -38,11 +42,12 @@ function CreateAccount( { setCurrentUser, allUsers, setUsers, currentUser } ) {
             fetch('https://book-wyrm-api.herokuapp.com/users', config)
                 .then(r => r.json())
                 .then(data => {
-                    setCurrentUser(data)
+                    currentUser.setUser(data)
                     setUsers([...allUsers, data])
                 })
         }
     }
+    
     return (
         <Form className='account-form' onSubmit={handleSubmit}>
             <Form.Group className='mb-3'>

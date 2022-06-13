@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { BookContext } from '../context/book'
+import { UserContext } from '../context/user'
 import ReviewForm from './ReviewForm'
 import ReviewList from './ReviewList'
 import DetailedBookBtns from './DetailedBookBtns'
 
-function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
+function DetailedBook() {
     const [displayReviewForm, setReviewForm] = useState(false)
     const [error, setError] = useState(false)
 
+    const currentBook = useContext(BookContext)
+    const currentUser = useContext(UserContext)
+    const book = currentBook.book
+
     useEffect(() => {
         setError(false)
-    }, [book, currentUser])
+    }, [currentBook.book, currentUser.user])
 
     function handleRequest(obj, resource, callback) {
         const config = {
@@ -28,53 +34,53 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
 
     function handleRatings(rating) {
         handleLists('readList')
-        currentUser.readList[book.id].ownRating = rating
+        currentUser.user.readList[book.id].ownRating = rating
         book.rating.allRatings.push(rating)
-        book.rating.total = book.rating.total === 'none' ? rating : rating + book.rating.total
+        book.rating.total = currentBook.book.rating.total === 'none' ? rating : rating + book.rating.total
         book.rating.average =  Math.round((book.rating.total / book.rating.allRatings.length) * 10) / 10
     }
 
     function handleReviews(review) {
-        if (!currentUser) {
+        if (!currentUser.user) {
             setError(true)
         } else {
-            currentUser.readList[book.id].review = review
+            currentUser.user.readList[book.id].review = review
             book.hasReviews = true
-            book.reviews[currentUser.id] = {
-                user: currentUser.name,
-                username: currentUser.username,
+            book.reviews[currentUser.user.id] = {
+                user: currentUser.user.name,
+                username: currentUser.user.username,
                 content: review,
-                rating: currentUser.readList[book.id].ownRating
+                rating: currentUser.user.readList[book.id].ownRating
             }
             setReviewForm(false)
             
-            handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
-            handleRequest(book, `books/${book.id}`, setCurrentBook)
+            handleRequest(currentUser.user, `users/${currentUser.user.id}`, currentUser.setUser)
+            handleRequest(book, `books/${book.id}`, currentBook.setBook)
         }
     }
 
     function handleLists(list) {
-        currentUser[list][book.id] = {
+        currentUser.user[list][book.id] = {
                     cover: book.cover,
                     title: book.title,
                     author: book.author,
                     id: book.id,
                     list: list
                 }
-                book[list][currentUser.id] = currentUser.id
+                book[list][currentUser.user.id] = currentUser.user.id
     }
     
     function handleBtns(e) {
-        if (!currentUser) {
+        if (!currentUser.user) {
             setError(true)
         } else {
-            if (currentUser.wishList[book.id]) delete currentUser.wishList[book.id]
-            if (book.wishList[currentUser.id]) delete book.wishList[currentUser.id]
+            if (currentUser.user.wishList[book.id]) delete currentUser.user.wishList[book.id]
+            if (book.wishList[currentUser.user.id]) delete book.wishList[currentUser.user.id]
             
             e.target.name === 'rate-btn' ? handleRatings(parseInt(e.target.value, 10)) : handleLists(e.target.name)
             
-            handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
-            handleRequest(book, `books/${book.id}`, setCurrentBook)
+            handleRequest(currentUser.user, `users/${currentUser.user.id}`, currentUser.setUser)
+            handleRequest(book, `books/${book.id}`, currentBook.setBook)
         }
     }
 
@@ -102,8 +108,6 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
             {error ? <p>Please <Link to="/login">log in</Link> to complete this action</p> : null}
             <br />
             <DetailedBookBtns
-                currentBook={book}
-                currentUser={currentUser}
                 handleClick={handleBtns}
                 setReviewForm={setReviewForm}
             />
