@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import ReviewBtns from "./ReviewBtns";
 import { Card, Button } from 'react-bootstrap'
 
-function ReadListBtns( {book, setCurrentBook, currentUser, setCurrentUser } ) {
+function ReadListBtns( {book, setCurrentBook, currentUser, setCurrentUser, seeMore } ) {
     const [displayForm, setForm] = useState(false)
     
 
-    function handleSeeMore(id) {
-        fetch(`https://book-wyrm-api.herokuapp.com/books/${id}`)
-            .then(r => r.json())
-            .then(data => setCurrentBook(data))
-    }
+    // function handleSeeMore(id) {
+    //     fetch(`https://book-wyrm-api.herokuapp.com/books/${id}`)
+    //         .then(r => r.json())
+    //         .then(data => setCurrentBook(data))
+    // }
 
-    const seeMore = <Button onClick={() => handleSeeMore(book.id)} >See more</Button>
+    // const seeMore = <Button onClick={() => handleSeeMore(book.id)} >See more</Button>
 
     if (!book.review && !book.ownRating) {
         return (

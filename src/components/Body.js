@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
+import { UserContext } from "../context/user";
 import Home from "./Home";
 import About from "./About";
 import FindBooks from "./FindBooks";
@@ -8,7 +9,10 @@ import Contact from "./Contact";
 import CreateAccount from "./CreateAccount";
 import Login from "./LoginPage";
 
-function Body( { setCurrentUser, currentUser } ) {
+function Body( {  } ) {
+    const currentUser = useContext(UserContext)
+    console.log(currentUser)
+
     const [allUsers, setUsers] = useState([])
     const [results, setResults] = useState(null)
     const [currentBook, setCurrentBook] = useState(null)
@@ -30,18 +34,18 @@ function Body( { setCurrentUser, currentUser } ) {
             </Route>
             <Route path="/bookfinder" >
                 <FindBooks
-                    currentUser={currentUser}
+                    currentUser={currentUser.user}
                     results={results}
                     setResults={setResults}
                     currentBook={currentBook}
                     setCurrentBook={setCurrentBook}
-                    setCurrentUser={setCurrentUser}
+                    setCurrentUser={currentUser.setUser}
                 />
             </Route>
             <Route path="/my-books">
                 <MyBooks 
-                    setCurrentUser={setCurrentUser}
-                    currentUser={currentUser}
+                    setCurrentUser={currentUser.setUser}
+                    currentUser={currentUser.user}
                     setCurrentBook={setCurrentBook}
                     currentBook={currentBook}
                 />
@@ -51,17 +55,17 @@ function Body( { setCurrentUser, currentUser } ) {
             </Route>
             <Route path="/login">
                 <Login
-                    currentUser={currentUser}
+                    currentUser={currentUser.user}
                     allUsers={allUsers}
-                    setCurrentUser={setCurrentUser}
+                    setCurrentUser={currentUser.setUser}
                 />
             </Route>
             <Route path="/create-account">
                 <CreateAccount 
-                    setCurrentUser={setCurrentUser}
+                    setCurrentUser={currentUser.setUser}
                     allUsers={allUsers}
                     setUsers={setUsers}
-                    currentUser={currentUser}
+                    currentUser={currentUser.user}
                 />
             </Route>
             </Switch>

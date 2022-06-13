@@ -4,11 +4,10 @@ import UserList from './UserList';
 
 function MyBookList( {currentUser, setCurrentBook, setCurrentUser} ) {
     const [readDisabled, setReadDisabled] = useState(true)
-    const [readList, updateReadlist] = useState('')
-    const [wishList, updateWishlist] = useState('')
+    const [readList, updateReadlist] = useState({})
+    const [wishList, updateWishlist] = useState({})
 
     useEffect(() => {
-        setReadDisabled(true)
         updateReadlist(currentUser.readList)
         updateWishlist(currentUser.wishList)
     }, [currentUser])

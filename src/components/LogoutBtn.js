@@ -1,13 +1,13 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { UserContext } from '../context/user';
 import { Button } from "react-bootstrap";
 
-function LogoutBtn( { setCurrentUser } ) {
-    const history = useHistory()
+function LogoutBtn() {
+    const currentUser = useContext(UserContext)
 
     return (
         <Button className="login-btns" onClick={() => {
-            setCurrentUser(null)
+            currentUser.setUser(null)
         }}>Log Out</Button>
     )
 }
