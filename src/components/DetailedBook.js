@@ -112,7 +112,7 @@ function DetailedBook() {
                 setReviewForm={setReviewForm}
             />
             <br/>
-            {displayReviewForm ? <ReviewForm onReview={handleReviews} /> : null}
+            {displayReviewForm ? <ReviewForm onReview={handleReviews} onCancel={() => setReviewForm(false)} /> : null}
             <br/>
             {book.hasReviews ? <ReviewList reviews={book.reviews} /> : null}
         </div>

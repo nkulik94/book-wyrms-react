@@ -7,7 +7,6 @@ import ReadListUnrated from "./ReadListUnrated";
 import ReadListRated from "./ReadListRated";
 
 function ReadListBtns( { book, handlePatch } ) {
-    const [displayForm, setForm] = useState(false)
 
     const setCurrentBook = useContext(BookContext).setBook
     const currentUser = useContext(UserContext).user
@@ -61,25 +60,21 @@ function ReadListBtns( { book, handlePatch } ) {
     }
 
     if (!book.review && !book.ownRating) {
-        return (
-            <ReadListUnrated onRate={handleNewRate} />
-        )
+        return <ReadListUnrated onRate={handleNewRate} />
     } else if (book.ownRating && !book.review) {
+        return <ReadListRated book={book} onChangeRating={handleChangeRate} />
+    } else {
         return (
-            <ReadListRated book={book} onChangeRating={handleChangeRate} />
+            <>
+            <Card>
+                <Card.Header>My Review</Card.Header>
+                <Card.Body>
+                    <ReadListReviewCard book={book} onDeleteReview={handleDeleteReview} />
+                </Card.Body>
+            </Card>
+            </>
         )
     }
-
-    return (
-        <>
-        <Card>
-            <Card.Header>My Review</Card.Header>
-            <Card.Body>
-                <ReadListReviewCard book={book} onDeleteReview={handleDeleteReview} setForm={setForm} />
-            </Card.Body>
-        </Card>
-        </>
-    )
 }
 
 export default ReadListBtns
