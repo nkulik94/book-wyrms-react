@@ -35,9 +35,9 @@ function DetailedBook() {
     function handleRatings(rating) {
         handleLists('readList')
         currentUser.user.readList[book.id].ownRating = rating
-        book.rating.allRatings.push(rating)
+        book.rating.amount += 1
         book.rating.total = currentBook.book.rating.total === 'none' ? rating : rating + book.rating.total
-        book.rating.average =  Math.round((book.rating.total / book.rating.allRatings.length) * 10) / 10
+        book.rating.average =  Math.round((book.rating.total / book.rating.amount) * 10) / 10
     }
 
     function handleReviews(review) {
@@ -84,7 +84,7 @@ function DetailedBook() {
         }
     }
 
-    const rating = book.rating.total === 'none' ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.allRatings.length} Book Wyrm(s)</p>
+    const rating = book.rating.total === 'none' ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.amount} Book Wyrm(s)</p>
     return (
         <div className='book-detail'>
             <img src={book.cover} alt={book.title} style={{float: "left", marginRight: "10px"}} />

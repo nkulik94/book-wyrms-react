@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/user";
 import { BookContext } from "../context/book";
-import ReviewBtns from "./ReviewBtns";
-import { Card } from 'react-bootstrap'
+import { Card } from "react-bootstrap";
+import ReadListReviewCard from "./ReadListReviewCard";
 
 function ReadListBtns( { book, seeMore } ) {
     const [displayForm, setForm] = useState(false)
@@ -55,15 +55,15 @@ function ReadListBtns( { book, seeMore } ) {
     }
 
     return (
+        <>
         <Card>
             <Card.Header>My Review</Card.Header>
             <Card.Body>
-                <Card.Title>{book.ownRating} out of 5</Card.Title>
-                <Card.Text>{book.review}</Card.Text>
-                {displayForm ? null : <ReviewBtns setForm={setForm} onDeleteReview={handleDeleteReview} />}
-                {seeMore}
+                <ReadListReviewCard book={book} onDeleteReview={handleDeleteReview} setForm={setForm} />
             </Card.Body>
         </Card>
+        {seeMore}
+        </>
     )
 }
 

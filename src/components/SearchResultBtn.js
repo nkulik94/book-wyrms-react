@@ -20,7 +20,7 @@ function SearchResultBtn( { book } ) {
             readList: {},
             wishList: {},
             rating: {
-                allRatings: [],
+                amount: 0,
                 total: 'none',
                 average: 'none'
             },
