@@ -11,6 +11,7 @@ function ReadListBtns( { book } ) {
     const setCurrentBook = useContext(BookContext).setBook
     const currentUser = useContext(UserContext).user
     const setCurrentUser = useContext(UserContext).setUser
+    const currentBook = useContext(BookContext).book
     
 
     function handlePatch(obj, resource, callback) {
@@ -35,26 +36,30 @@ function ReadListBtns( { book } ) {
             .then(book => {
                 delete book.reviews[currentUser.id]
                 if (Object.keys(book.reviews).length === 0) book.hasReviews = false
-                handlePatch(book, `books/${book.id}`, setCurrentBook)
+                handlePatch(book, `books/${book.id}`, (book) => {
+                    if (book.id === currentBook.id) setCurrentBook(book)
+                })
             })
     }
 
-    function handleRate(e) {
-        const difference = parseInt(e.target.value, 10) - currentUser.readList[book.id].ownRating
+    function handleNewRate(e) {
         currentUser.readList[book.id].ownRating = parseInt(e.target.value, 10)
         handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
-        console.log(difference)
         fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
-                book.rating.total += difference
-                handlePatch(book, `books/${book.id}`, setCurrentBook)
+                book.rating.amount += 1
+                book.rating.total += currentUser.readList[book.id].ownRating
+                book.rating.average = Math.ceil((book.rating.total / book.rating.amount) * 10) / 10
+                handlePatch(book, `books/${book.id}`, (book) => {
+                    if (book.id === currentBook.id) setCurrentBook(book)
+                })
             })
     }
 
     if (!book.review && !book.ownRating) {
         return (
-            <ReadListUnrated />
+            <ReadListUnrated onRate={handleNewRate} />
         )
     } else if (book.ownRating && !book.review) {
         return (

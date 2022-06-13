@@ -21,8 +21,8 @@ function SearchResultBtn( { book } ) {
             wishList: {},
             rating: {
                 amount: 0,
-                total: 'none',
-                average: 'none'
+                total: 0,
+                average: 0
             },
             hasReviews: false,
             reviews: {}
