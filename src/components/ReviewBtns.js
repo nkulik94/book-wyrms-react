@@ -5,7 +5,7 @@ function ReviewBtns( {onEdit, onDeleteReview} ) {
     return (
         <ButtonGroup>
             <Button variant="primary" onClick={() => onEdit(true)} >Edit</Button>
-            <Button variant="primary" onClick={onDeleteReview} >Delete</Button>
+            <Button variant="danger" onClick={onDeleteReview} >Delete</Button>
         </ButtonGroup>
     )
 }

@@ -30,7 +30,7 @@ function UserListItems( { book } ) {
     }
 
 
-    const seeMore = <Button onClick={() => handleSeeMore(book.id)} style={{marginTop: '10px'}}>See more</Button>
+    const seeMore = <Button variant='info' onClick={() => handleSeeMore(book.id)} style={{marginTop: '10px'}}>See more</Button>
 
     const buttons = book.list === 'readList' ? <ReadListBtns book={book} handlePatch={handlePatch} /> : null
 

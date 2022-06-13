@@ -5,7 +5,7 @@ import ReviewBtns from "./ReviewBtns";
 function ReadListReviewCard( {onEdit, onDeleteReview, book } ) {
     return (
         <>
-        <Card.Title>{book.ownRating} out of 5</Card.Title>
+        <Card.Subtitle>{book.ownRating} out of 5</Card.Subtitle>
         <Card.Text>{book.review}</Card.Text>
         <ReviewBtns onEdit={onEdit} onDeleteReview={onDeleteReview} />
         </>

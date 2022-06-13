@@ -6,7 +6,7 @@ function LogoutBtn() {
     const currentUser = useContext(UserContext)
 
     return (
-        <Button className="login-btns" onClick={() => {
+        <Button variant='danger' className="login-btns" onClick={() => {
             currentUser.setUser(null)
         }}>Log Out</Button>
     )

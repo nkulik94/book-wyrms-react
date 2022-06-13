@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./Home";
-import About from "./About";
 import FindBooks from "./FindBooks";
 import MyBooks from "./MyBooks";
 import Contact from "./Contact";
@@ -25,9 +24,6 @@ function Body( {  } ) {
             <Switch>
             <Route exact path="/">
                 <Home />
-            </Route>
-            <Route path="/about">
-                <About />
             </Route>
             <Route path="/bookfinder" >
                 <FindBooks results={results} setResults={setResults} />
