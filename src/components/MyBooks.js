@@ -21,7 +21,7 @@ function MyBooks() {
     
 
     return (
-        <div style={{position: 'relative'}} >
+        <div style={{position: 'relative', marginTop: '20px'}} >
             <MyBookList />
             {currentBook ? <DetailedBook /> : null}
         </div>
