@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { BookContext } from '../context/book';
-import { UserContext } from '../context/user';
+import WishListBtns from './WishListBtns';
 import ReadListBtns from './ReadListBtns';
 
 function UserListItems( { book } ) {
     const setBook = useContext(BookContext).setBook
-    const currentUser = useContext(UserContext).user
-    const currentBook = useContext(BookContext).book
 
     function handleSeeMore(id) {
         fetch(`https://book-wyrm-api.herokuapp.com/books/${id}`)
@@ -32,7 +30,7 @@ function UserListItems( { book } ) {
 
     const seeMore = <Button variant='info' onClick={() => handleSeeMore(book.id)} style={{marginTop: '10px'}}>See more</Button>
 
-    const buttons = book.list === 'readList' ? <ReadListBtns book={book} handlePatch={handlePatch} /> : null
+    const buttons = book.list === 'readList' ? <ReadListBtns book={book} handlePatch={handlePatch} /> : <WishListBtns book={book} handlePatch={handlePatch} />
 
     return (
         <>
