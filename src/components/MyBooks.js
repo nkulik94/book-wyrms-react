@@ -4,17 +4,10 @@ import MyBookList from './MyBookList';
 import DetailedBook from './DetailedBook';
 function MyBooks( { setCurrentUser, currentUser, setCurrentBook, currentBook } ) {
     const history = useHistory()
-    const [readDisabled, setReadDisabled] = useState(true)
-    const [readList, updateReadlist] = useState('')
-    const [wishList, updateWishlist] = useState('')
 
     useEffect(() => {
-        setReadDisabled(true)
         if (!currentUser) {
             history.push('./login')
-        } else {
-            updateReadlist(currentUser.readList)
-            updateWishlist(currentUser.wishList)
         }
     }, [currentUser])
     if (!currentUser) return null
@@ -24,8 +17,8 @@ function MyBooks( { setCurrentUser, currentUser, setCurrentBook, currentBook } )
 
     return (
         <div style={{position: 'relative'}} >
-            <MyBookList currentUser={currentUser} setCurrentBook={setCurrentBook} />
-            <DetailedBook book={currentBook} currentUser={currentUser} setCurrentBook={setCurrentBook} setCurrentUser={setCurrentUser} />
+            <MyBookList currentUser={currentUser} setCurrentBook={setCurrentBook} setCurrentUser={setCurrentUser}  />
+            {currentBook ? <DetailedBook book={currentBook} currentUser={currentUser} setCurrentBook={setCurrentBook} setCurrentUser={setCurrentUser} /> : null}
         </div>
     )
 }

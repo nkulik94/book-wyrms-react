@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ReviewBtns from "./ReviewBtns";
-import { Card, Button, ButtonGroup, Form } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 
-function ReadListBtns( {book, setCurrentBook } ) {
+function ReadListBtns( {book, setCurrentBook, currentUser, setCurrentUser } ) {
     const [displayForm, setForm] = useState(false)
-    const [review, setReview] = useState('')
-
-    useEffect(() => {
-        if (book.review) setReview(book.review)
-    }, [])
+    
 
     function handleSeeMore(id) {
         fetch(`https://book-wyrm-api.herokuapp.com/books/${id}`)
@@ -25,7 +21,7 @@ function ReadListBtns( {book, setCurrentBook } ) {
             {seeMore}
             </>
         )
-    } else if (book.ownRating) {
+    } else if (book.ownRating && !book.review) {
         return (
             <>
             <p>Your Rating: {book.ownRating} out of 5</p>
@@ -34,13 +30,39 @@ function ReadListBtns( {book, setCurrentBook } ) {
         )
     }
 
+    function handleRequest(obj, resource, callback) {
+        const config = {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(obj)
+        }
+
+        fetch(`https://book-wyrm-api.herokuapp.com/${resource}`, config)
+        .then(r => r.json())
+        .then(data => callback(data))
+    }
+
+    function handleDeleteReview() {
+        delete currentUser.readList[book.id].review
+        handleRequest(currentUser, `users/${currentUser.id}`, setCurrentUser)
+        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+            .then(r => r.json())
+            .then(book => {
+                delete book.reviews[currentUser.id]
+                if (Object.keys(book.reviews).length === 0) book.hasReviews = false
+                handleRequest(book, `books/${book.id}`, setCurrentBook)
+            })
+    }
+
     return (
         <Card>
             <Card.Header>My Review</Card.Header>
             <Card.Body>
-                <Card.Title>{book.ownRating}</Card.Title>
-                <Card.Text>{review}</Card.Text>
-                {displayForm ? null : <ReviewBtns setForm={setForm} />}
+                <Card.Title>{book.ownRating} out of 5</Card.Title>
+                <Card.Text>{book.review}</Card.Text>
+                {displayForm ? null : <ReviewBtns setForm={setForm} onDeleteReview={handleDeleteReview} />}
                 {seeMore}
             </Card.Body>
         </Card>
