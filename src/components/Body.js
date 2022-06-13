@@ -41,8 +41,9 @@ function Body( { setCurrentUser, currentUser } ) {
             <Route path="/my-books">
                 <MyBooks 
                     setCurrentUser={setCurrentUser}
-                    allUsers={allUsers}
                     currentUser={currentUser}
+                    setCurrentBook={setCurrentBook}
+                    currentBook={currentBook}
                 />
             </Route>
             <Route path="/contact">

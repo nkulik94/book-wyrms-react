@@ -39,7 +39,7 @@ function Search( {setCurrentBook, results, setResults} ) {
                 isSearchResult={true}
                 books={filteredList.slice(currentPage.start, currentPage.end)}
                 setCurrentBook={setCurrentBook}
-                key={'coverEdition'}
+                keyName={'coverEdition'}
             />
         </div>
     )

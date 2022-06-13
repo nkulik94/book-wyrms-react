@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import ShelfDisplayBtns from './ShelfDisplayBtns';
-import UserList from './UserList';
-
-function MyBooks( { setCurrentUser, currentUser } ) {
+import MyBookList from './MyBookList';
+import DetailedBook from './DetailedBook';
+function MyBooks( { setCurrentUser, currentUser, setCurrentBook, currentBook } ) {
     const history = useHistory()
     const [readDisabled, setReadDisabled] = useState(true)
+    const [readList, updateReadlist] = useState('')
+    const [wishList, updateWishlist] = useState('')
 
     useEffect(() => {
         setReadDisabled(true)
         if (!currentUser) {
             history.push('./login')
+        } else {
+            updateReadlist(currentUser.readList)
+            updateWishlist(currentUser.wishList)
         }
     }, [currentUser])
     if (!currentUser) return null
@@ -19,9 +23,9 @@ function MyBooks( { setCurrentUser, currentUser } ) {
     
 
     return (
-        <div className='list'>
-            <ShelfDisplayBtns readDisabled={readDisabled} setReadDisabled={setReadDisabled} />
-            <UserList list={readDisabled ? currentUser.readList : currentUser.wishList} listType={readDisabled ? 'readList' : 'wishList'} />
+        <div style={{position: 'relative'}} >
+            <MyBookList currentUser={currentUser} setCurrentBook={setCurrentBook} />
+            <DetailedBook book={currentBook} currentUser={currentUser} setCurrentBook={setCurrentBook} setCurrentUser={setCurrentUser} />
         </div>
     )
 }

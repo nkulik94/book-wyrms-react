@@ -75,7 +75,7 @@ ul {
   padding: 2%;
 }
 
-#book-detail {
+.book-detail {
   position: absolute;
   right: 0;
   display: inline-block;

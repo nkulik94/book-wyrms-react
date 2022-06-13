@@ -58,7 +58,8 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
                     cover: book.cover,
                     title: book.title,
                     author: book.author,
-                    id: book.id
+                    id: book.id,
+                    list: list
                 }
                 book[list][currentUser.id] = currentUser.id
     }
@@ -79,7 +80,7 @@ function DetailedBook( { book, currentUser, setCurrentUser, setCurrentBook } ) {
 
     const rating = book.rating.total === 'none' ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.allRatings.length} Book Wyrm(s)</p>
     return (
-        <div id='book-detail'>
+        <div className='book-detail'>
             <img src={book.cover} alt={book.title} style={{float: "left", marginRight: "10px"}} />
             <h2>{book.title}</h2>
             <br/>

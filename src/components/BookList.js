@@ -1,7 +1,7 @@
 import React from "react";
 import BookCard from "./BookCard";
 
-function BookList( { books, isSearchResult, setCurrentBook, keyName, listType } ) {
+function BookList( { books, isSearchResult, setCurrentBook, keyName } ) {
     return (
         <>
             <ul>
@@ -12,7 +12,6 @@ function BookList( { books, isSearchResult, setCurrentBook, keyName, listType } 
                                     key={book[keyName]}
                                     isSearchResult={isSearchResult}
                                     setCurrentBook={setCurrentBook}
-                                    listType={listType}
                                 />
                             )
                     })
