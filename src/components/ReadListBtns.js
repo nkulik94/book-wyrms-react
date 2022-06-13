@@ -4,8 +4,9 @@ import { BookContext } from "../context/book";
 import { Card } from "react-bootstrap";
 import ReadListReviewCard from "./ReadListReviewCard";
 import ReadListUnrated from "./ReadListUnrated";
+import ReadListRated from "./ReadListRated";
 
-function ReadListBtns( { book } ) {
+function ReadListBtns( { book, handlePatch } ) {
     const [displayForm, setForm] = useState(false)
 
     const setCurrentBook = useContext(BookContext).setBook
@@ -14,19 +15,6 @@ function ReadListBtns( { book } ) {
     const currentBook = useContext(BookContext).book
     
 
-    function handlePatch(obj, resource, callback) {
-        const config = {
-            method: "PATCH",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(obj)
-        }
-
-        fetch(`https://book-wyrm-api.herokuapp.com/${resource}`, config)
-        .then(r => r.json())
-        .then(data => callback(data))
-    }
 
     function handleDeleteReview() {
         delete currentUser.readList[book.id].review
@@ -57,15 +45,28 @@ function ReadListBtns( { book } ) {
             })
     }
 
+    function handleChangeRate(newRating) {
+        const oldRating = currentUser.readList[book.id].ownRating
+        currentUser.readList[book.id].ownRating = newRating
+        handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
+        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+            .then(r => r.json())
+            .then(book => {
+                book.rating.total += newRating - oldRating
+                book.rating.average = Math.ceil((book.rating.total / book.rating.amount) * 10) / 10
+                handlePatch(book, `books/${book.id}`, (book) => {
+                    if (book.id === currentBook.id) setCurrentBook(book)
+                })
+            })
+    }
+
     if (!book.review && !book.ownRating) {
         return (
             <ReadListUnrated onRate={handleNewRate} />
         )
     } else if (book.ownRating && !book.review) {
         return (
-            <>
-            <p>Your Rating: {book.ownRating} out of 5</p>
-            </>
+            <ReadListRated book={book} onChangeRating={handleChangeRate} />
         )
     }
 
