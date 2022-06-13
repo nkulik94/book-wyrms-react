@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, ButtonGroup, Form } from 'react-bootstrap';
 
-function ReviewForm( { onReview, onCancel } ) {
-    const [formData, setFormData] = useState('')
+function ReviewForm( { onReview, onCancel, formValue } ) {
+    const [formData, setFormData] = useState(formValue)
     
     return (
         <Form onSubmit={e => {
@@ -15,7 +15,7 @@ function ReviewForm( { onReview, onCancel } ) {
             </Form.Group>
             <br/>
             <ButtonGroup>
-                <Button variant="primary" type="submit">Submit Review</Button>
+                <Button variant="primary" type="submit">Submit</Button>
                 <Button variant="danger" onClick={onCancel} >Cancel</Button>
             </ButtonGroup>
         </Form>

@@ -4,9 +4,11 @@ import { BookContext } from "../context/book";
 import { Card } from "react-bootstrap";
 import ReadListReviewCard from "./ReadListReviewCard";
 import ReadListUnrated from "./ReadListUnrated";
-import ReadListRated from "./ReadListRated";
+import RateEdit from "./RateEdit";
+import ReviewForm from "./ReviewForm";
 
 function ReadListBtns( { book, handlePatch } ) {
+    const [displayEditForm, setDisplayEdit] = useState(false)
 
     const setCurrentBook = useContext(BookContext).setBook
     const currentUser = useContext(UserContext).user
@@ -27,6 +29,20 @@ function ReadListBtns( { book, handlePatch } ) {
                     if (book.id === currentBook.id) setCurrentBook(book)
                 })
             })
+    }
+
+    function handleEditReview(newReview) {
+        currentUser.readList[book.id].review = newReview
+        handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
+        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+            .then(r => r.json())
+            .then(book => {
+                book.reviews[currentUser.id].content = newReview
+                handlePatch(book, `books/${book.id}`, (book) => {
+                    if (book.id === currentBook.id) setCurrentBook(book)
+                })
+            })
+        setDisplayEdit(false)
     }
 
     function handleNewRate(e) {
@@ -53,6 +69,7 @@ function ReadListBtns( { book, handlePatch } ) {
             .then(book => {
                 book.rating.total += newRating - oldRating
                 book.rating.average = Math.ceil((book.rating.total / book.rating.amount) * 10) / 10
+                if (book.reviews[currentUser.id]) book.reviews[currentUser.id].rating = newRating
                 handlePatch(book, `books/${book.id}`, (book) => {
                     if (book.id === currentBook.id) setCurrentBook(book)
                 })
@@ -62,16 +79,23 @@ function ReadListBtns( { book, handlePatch } ) {
     if (!book.review && !book.ownRating) {
         return <ReadListUnrated onRate={handleNewRate} />
     } else if (book.ownRating && !book.review) {
-        return <ReadListRated book={book} onChangeRating={handleChangeRate} />
+        return (
+            <>
+            <p>Your Rating: {book.ownRating} out of 5</p>
+            <RateEdit onChangeRating={handleChangeRate} />
+            </>
+        )
     } else {
         return (
             <>
             <Card>
                 <Card.Header>My Review</Card.Header>
                 <Card.Body>
-                    <ReadListReviewCard book={book} onDeleteReview={handleDeleteReview} />
+                    {displayEditForm ? <ReviewForm formValue={book.review} onReview={handleEditReview} onCancel={() => setDisplayEdit(false)} /> : <ReadListReviewCard book={book} onDeleteReview={handleDeleteReview} onEdit={setDisplayEdit} />}
                 </Card.Body>
             </Card>
+            <p>Change Rating?</p>
+            <RateEdit onChangeRating={handleChangeRate} />
             </>
         )
     }

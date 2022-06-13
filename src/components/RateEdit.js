@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap'
 import RateDropdown from './RateDropdown';
 
-function ReadListRated({ book, onChangeRating }) {
+function RateEdit({ onChangeRating }) {
     const [displayDropdown, setDropdown] = useState(false)
 
     function handleRateChange(e) {
@@ -11,11 +11,10 @@ function ReadListRated({ book, onChangeRating }) {
     }
     return (
         <>
-        <p>Your Rating: {book.ownRating} out of 5</p>
         {displayDropdown ? <RateDropdown handleClick={handleRateChange} /> : <Button onClick={() => setDropdown(true)} >Change</Button>}
         <br/>
         </>
     )
 }
 
-export default ReadListRated
+export default RateEdit

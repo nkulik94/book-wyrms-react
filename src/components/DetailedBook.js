@@ -33,11 +33,15 @@ function DetailedBook() {
     }
 
     function handleRatings(rating) {
-        handleLists('readList')
-        currentUser.user.readList[book.id].ownRating = rating
-        book.rating.amount += 1
-        book.rating.total += rating
-        book.rating.average =  Math.round((book.rating.total / book.rating.amount) * 10) / 10
+        if (!currentUser.user) {
+            setError(true)
+        } else {
+            handleLists('readList')
+            currentUser.user.readList[book.id].ownRating = rating
+            book.rating.amount += 1
+            book.rating.total += rating
+            book.rating.average =  Math.round((book.rating.total / book.rating.amount) * 10) / 10
+        }
     }
 
     function handleReviews(review) {
@@ -112,7 +116,7 @@ function DetailedBook() {
                 setReviewForm={setReviewForm}
             />
             <br/>
-            {displayReviewForm ? <ReviewForm onReview={handleReviews} onCancel={() => setReviewForm(false)} /> : null}
+            {displayReviewForm ? <ReviewForm onReview={handleReviews} onCancel={() => setReviewForm(false)} formValue={''} /> : null}
             <br/>
             {book.hasReviews ? <ReviewList reviews={book.reviews} /> : null}
         </div>
