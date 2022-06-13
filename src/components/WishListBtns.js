@@ -10,16 +10,18 @@ function WishListBtns({ handlePatch, book }) {
     const setCurrentUser = useContext(UserContext).setUser
 
 
-    function handleAddToRead() {
-        book.list = 'readList'
+    function handleModifyList(read) {
         delete currentUser.wishList[book.id]
-        currentUser.readList[book.id] = book
+        if (read) {
+            book.list = 'readList'
+            currentUser.readList[book.id] = book
+        }
         handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
         fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
                 delete book.wishList[currentUser.id]
-                book.readList[currentUser.id] = currentUser.id
+                if (read) book.readList[currentUser.id] = currentUser.id
                 handlePatch(book, `books/${book.id}`, () => {
                     if (currentBook.id === book.id) setCurrentBook(book)
                 })
@@ -28,8 +30,8 @@ function WishListBtns({ handlePatch, book }) {
 
     return (
         <ButtonGroup>
-            <Button onClick={handleAddToRead} >Add to Read</Button>
-            <Button>Remove</Button>
+            <Button onClick={() => handleModifyList(true)} >Add to Read</Button>
+            <Button onClick={() => handleModifyList(false)} variant='danger' >Remove</Button>
         </ButtonGroup>
     )
 }
