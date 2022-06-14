@@ -1,7 +1,5 @@
-import { BookSharp } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { Image } from 'react-bootstrap'
-import src from '../book-wyrm-profile.jpeg'
 
 function Contact() {
     const [boss, setBoss] = useState({})
