@@ -13,12 +13,12 @@ function Contact() {
     }, [])
 
     return (
-        <div id='contact'>
+        <div className='info'>
             <div style={{textAlign: 'center'}}>
             <h2>{boss.title}: {boss.name}</h2>
             </div>
             <br/>
-            <Image roundedCircle src={src} alt='profile-pic' id='profile-pic' />
+            <Image roundedCircle src={boss.image} alt='profile-pic' id='profile-pic' />
             <p><strong>Github:</strong> <a href={boss.github}>{boss.github}</a></p>
             <p><strong>Blog:</strong> <a href={boss.blog}>{boss.blog}</a></p>
             <p>
