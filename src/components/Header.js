@@ -11,7 +11,8 @@ function Header( {  } ) {
 
     return (
         <header position="relative">
-            <h1>Book Wyrm header</h1>
+            <h1>Book Wyrms</h1>
+            <h3>Because a Wyrm is so much cooler than a worm</h3>
             <NavBar />
             {currentUser.user ? <LogoutBtn /> : <LoginButtons />}
         </header>

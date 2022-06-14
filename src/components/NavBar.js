@@ -5,20 +5,20 @@ const linkStyles = {
     display: "inline-block",
     padding: "12px",
     margin: "0 6px 6px",
-    background: "blue",
+    borderBottom: '2px solid red',
     textDecoration: "none",
-    color: "white",
+    color: "black",
   };
 
 function NavBar() {
     return (
-        <div id='nav-bar'>
+        <nav id='nav-bar'>
         <NavLink
             to="/"
             exact
             style={linkStyles}
             activeStyle={{
-            background: "darkblue",
+                borderBottom: '2px solid darkblue',
             }}
         >
             Home
@@ -28,7 +28,7 @@ function NavBar() {
         exact
         style={linkStyles}
             activeStyle={{
-            background: "darkblue",
+                borderBottom: '2px solid darkblue',
             }}
         >
             Search
@@ -38,7 +38,7 @@ function NavBar() {
         exact
         style={linkStyles}
             activeStyle={{
-            background: "darkblue",
+                borderBottom: '2px solid darkblue',
             }}
         >
             Shelf
@@ -48,12 +48,12 @@ function NavBar() {
         exact
         style={linkStyles}
             activeStyle={{
-            background: "darkblue",
+                borderBottom: '2px solid darkblue',
             }}
         >
             Contact
         </NavLink>
-        </div>
+        </nav>
     )
 }
 
