@@ -14,8 +14,8 @@ function PageBtns( { setPage, pageAmt, currentPage } ) {
     for (let i = 1; i <= pageAmt; i++) {
         allPages.push({
             page: i,
-            start: (i - 1) * 10,
-            end: i * 10
+            start: (i - 1) * 5,
+            end: i * 5
     })}
 
 

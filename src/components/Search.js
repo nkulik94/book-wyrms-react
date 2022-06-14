@@ -10,7 +10,7 @@ function Search( { results, setResults} ) {
     const [currentPage, setPage] = useState({
         page: 1,
         start: 0,
-        end: 10
+        end: 5
     })
 
     const setCurrentBook = useContext(BookContext).setBook
@@ -37,7 +37,7 @@ function Search( { results, setResults} ) {
     return (
         <div className="list">
             <SearchForm setResults={setResults} setPage={setPage} />
-            {results ? <PageBtns setPage={setPage} pageAmt={Math.ceil(filteredList.length / 10)} currentPage={currentPage} /> : null}
+            {results ? <PageBtns setPage={setPage} pageAmt={Math.ceil(filteredList.length / 5)} currentPage={currentPage} /> : null}
             <BookList
                 isSearchResult={true}
                 books={filteredList.slice(currentPage.start, currentPage.end)}
