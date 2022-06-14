@@ -24,6 +24,16 @@ function NavBar() {
             Home
         </NavLink>
         <NavLink
+        to="/featured-book"
+        exact
+        style={linkStyles}
+            activeStyle={{
+                borderBottom: '2px solid darkblue',
+            }}
+        >
+            Featured Book
+        </NavLink>
+        <NavLink
         to="/bookfinder"
         exact
         style={linkStyles}

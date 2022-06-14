@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./Home";
+import FeaturedBook from "./FeaturedBook";
 import FindBooks from "./FindBooks";
 import MyBooks from "./MyBooks";
 import Contact from "./Contact";
@@ -11,7 +12,6 @@ function Body( {  } ) {
 
     const [allUsers, setUsers] = useState([])
     const [results, setResults] = useState(null)
-    //const [currentBook, setCurrentBook] = useState(null)
 
     useEffect(() => {
         fetch('https://book-wyrm-api.herokuapp.com/users')
@@ -24,6 +24,9 @@ function Body( {  } ) {
             <Switch>
             <Route exact path="/">
                 <Home />
+            </Route>
+            <Route path='/featured-book'>
+                <FeaturedBook />
             </Route>
             <Route path="/bookfinder" >
                 <FindBooks results={results} setResults={setResults} />
