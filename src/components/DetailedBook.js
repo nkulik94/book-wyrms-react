@@ -4,19 +4,20 @@ import { BookContext } from '../context/book'
 import { UserContext } from '../context/user'
 import ReviewForm from './ReviewForm'
 import ReviewList from './ReviewList'
+import BookDetails from './BookDetails'
 import DetailedBookBtns from './DetailedBookBtns'
 
 function DetailedBook() {
     const [displayReviewForm, setReviewForm] = useState(false)
     const [error, setError] = useState(false)
 
-    const currentBook = useContext(BookContext)
+    const book = useContext(BookContext).book
     const currentUser = useContext(UserContext)
-    const book = currentBook.book
+    const setCurrentBook = useContext(BookContext).setBook
 
     useEffect(() => {
         setError(false)
-    }, [currentBook.book, currentUser.user])
+    }, [book, currentUser.user])
 
     function handleRequest(obj, resource, callback) {
         const config = {
@@ -59,7 +60,7 @@ function DetailedBook() {
             setReviewForm(false)
             
             handleRequest(currentUser.user, `users/${currentUser.user.id}`, currentUser.setUser)
-            handleRequest(book, `books/${book.id}`, currentBook.setBook)
+            handleRequest(book, `books/${book.id}`, setCurrentBook)
         }
     }
 
@@ -84,31 +85,13 @@ function DetailedBook() {
             e.target.name === 'rate-btn' ? handleRatings(parseInt(e.target.value, 10)) : handleLists(e.target.name)
             
             handleRequest(currentUser.user, `users/${currentUser.user.id}`, currentUser.setUser)
-            handleRequest(book, `books/${book.id}`, currentBook.setBook)
+            handleRequest(book, `books/${book.id}`, setCurrentBook)
         }
     }
 
-    const rating = book.rating.total === 0 ? <p>This book has not been rated by any Book Wyrms</p> : <p>This book has been given an average rating of {book.rating.average} out of 5 by {book.rating.amount} Book Wyrm(s)</p>
     return (
         <div className='book-detail'>
-            <img src={book.cover} alt={book.title} style={{float: "left", marginRight: "10px"}} />
-            <h2>{book.title}</h2>
-            <br/>
-            <h4>By {book.author}</h4>
-            <br/>
-            <h6>Published by: {book.publisher}</h6>
-            <br/>
-            <h6>Published {book.publishDate}</h6>
-            <br/>
-            <p>Description: 
-                <br/>
-                {book.description}
-            </p>
-            <br/>
-            {rating}
-            <br/>
-            <p>This book has been read by {Object.keys(book.readList).length} Book Wyrm(s), and {Object.keys(book.wishList).length} Book Wyrm(s) have put it on a wish list</p>
-            <br/>
+            <BookDetails book={book} />
             {error ? <p>Please <Link to="/login">log in</Link> to complete this action</p> : null}
             <br />
             <DetailedBookBtns

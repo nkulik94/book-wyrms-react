@@ -17,6 +17,7 @@ header {
   text-align: center;
   position: relative;
   background-color: antiquewhite;
+  padding: 20px;
 }
 
 .login-btns {
@@ -52,7 +53,7 @@ header {
 .list {
   position: absolute;
   left: 0;
-  width: 40%;
+  width: 36%;
   margin-left: 2%;
   background-color: khaki;
   padding-left: 10px;
@@ -76,7 +77,7 @@ ul {
 .book-card {
   margin: 5px;
   text-align: center;
-  width: 250px;
+  width: 80%;
   border: 1px dashed black;
   padding: 2%;
   background-color: khaki;
