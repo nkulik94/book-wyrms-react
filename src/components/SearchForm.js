@@ -13,7 +13,7 @@ function SearchForm( { setResults } ) {
 
     function handleSearch(e) {
         e.preventDefault()
-        fetch(`http://openlibrary.org/search.json?${searchParams.param}=${searchParams.searchFor}`)
+        fetch(`/api/search.json?${searchParams.param}=${searchParams.searchFor}`)
             .then(r => r.json())
             .then(data => {
                 setResults(data.docs)
