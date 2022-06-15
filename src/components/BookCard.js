@@ -2,7 +2,7 @@ import React from 'react';
 import SearchResultBtn from './SearchResultBtn';
 import UserListItems from './UserListItems';
 
-function BookCard( { book, isSearchResult, listType } ) {
+function BookCard( { book, isSearchResult } ) {
     const cover = book.cover ? <img src={book.cover} alt={book.title}/> : <h4>There is no cover available for this book</h4>
     const buttons = isSearchResult ? <SearchResultBtn book={book} /> : <UserListItems book={book} />
 
