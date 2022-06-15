@@ -1,5 +1,9 @@
 # Book Wyrms 2.0
 
+## Domain
+
+This app has been deployed at [https://sweet-zuccutto-773929.netlify.app/](https://sweet-zuccutto-773929.netlify.app/)
+
 ## How to Run the App
 
 At this point, this app has not been deployed online, although I hope to do so. It was created with [Create React App](https://github.com/facebook/create-react-app), so if you clone the repo and run `npm install` and `npm start` you should be able to run it locally. The backend has been deployed to Heroku ([here](https://book-wyrm-api.herokuapp.com/) if you want to see the data we're working with), so no local json-server is necessary to run the app.

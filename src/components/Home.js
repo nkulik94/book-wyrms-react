@@ -26,6 +26,8 @@ function Home() {
             <p>
                 Note: If you had no idea what the previous paragraph meant, to put it simply if you create an account it'll disappear approximately a half hour after you leave the site.
             </p>
+            <br/>
+            <p>Please note that this site is in no way secure, so if you create an account we at Book Wyrms advise against using the same password that you use for your online banking.</p>
         </div>
     )
 }
