@@ -36,7 +36,7 @@ function Search( { results, setResults} ) {
 
     return (
         <div className="list">
-            <SearchForm setResults={setResults} setPage={setPage} />
+            <SearchForm setResults={setResults} />
             {results ? <PageBtns setPage={setPage} pageAmt={Math.ceil(filteredList.length / 5)} currentPage={currentPage} /> : null}
             <BookList
                 isSearchResult={true}

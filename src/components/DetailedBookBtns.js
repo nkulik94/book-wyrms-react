@@ -15,6 +15,8 @@ function DetailedBookBtns( { setReviewForm, handleClick } ) {
         if (currentUser) {
             currentBook.readList[currentUser.id] && currentUser.readList[currentBook.id].ownRating ? setRated(true) : setRated(false)
             currentBook.readList[currentUser.id] && currentUser.readList[currentBook.id].review ? setReviewed(true) : setReviewed(false)
+        } else {
+            setRated(false)
         }
     }, [currentBook, currentUser])
 

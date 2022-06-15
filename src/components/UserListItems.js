@@ -35,6 +35,7 @@ function UserListItems( { book } ) {
     return (
         <>
         {buttons}
+        <br/>
         {seeMore}
         </>
     )
