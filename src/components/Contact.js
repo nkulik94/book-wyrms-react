@@ -25,7 +25,7 @@ function Contact() {
                 {boss.bio}
             </p>
             <br/>
-            <span>Questions? <a href={`mailto:${boss.email}`}>Email Naftali</a> or connect with him on <a href={boss.linkedin} >LinkedIn</a></span>
+            <span>Questions? <a href={`mailto:${boss.email}`}>Email</a> Naftali or connect with him on <a href={boss.linkedin} >LinkedIn</a></span>
         </div>
     )
 }
