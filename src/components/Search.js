@@ -4,7 +4,8 @@ import SearchForm from "./SearchForm";
 import PageBtns from "./PageBtns";
 import BookList from "./BookList";
 
-function Search( { results, setResults} ) {
+function Search() {
+    const [results, setResults] = useState(null)
     const [fixedResults, setListToRender] = useState([])
     //const [filterBy, setFilter] = useState('')
     const [currentPage, setPage] = useState({

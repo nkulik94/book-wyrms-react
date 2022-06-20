@@ -11,7 +11,6 @@ import Login from "./LoginPage";
 function Body( {  } ) {
 
     const [allUsers, setUsers] = useState([])
-    const [results, setResults] = useState(null)
 
     useEffect(() => {
         fetch('https://book-wyrm-api.herokuapp.com/users')
@@ -29,7 +28,7 @@ function Body( {  } ) {
                 <FeaturedBook />
             </Route>
             <Route path="/bookfinder" >
-                <FindBooks results={results} setResults={setResults} />
+                <FindBooks />
             </Route>
             <Route path="/my-books">
                 <MyBooks />
