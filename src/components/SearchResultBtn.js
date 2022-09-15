@@ -8,7 +8,7 @@ function SearchResultBtn( { book } ) {
     const setCurrentBook = useContext(BookContext).setBook
 
     function handleClick() {
-        fetch(`https://book-wyrm-api.herokuapp.com/books?olKey=${book.coverEdition}`)
+        fetch(`https://json-server-template-production.up.railway.app/books?olKey=${book.coverEdition}`)
             .then(r => r.json())
             .then(data => data.length > 0 ? setCurrentBook(data[0]) : handleNoResponse())
     }
@@ -47,7 +47,7 @@ function SearchResultBtn( { book } ) {
                     },
                     body: JSON.stringify(newBook)
                 }
-                fetch('https://book-wyrm-api.herokuapp.com/books', config)
+                fetch('https://json-server-template-production.up.railway.app/books', config)
                     .then(r => r.json())
                     .then(res => setCurrentBook(res))
             })

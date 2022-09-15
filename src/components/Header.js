@@ -6,7 +6,7 @@ import LogoutBtn from "./LogoutBtn";
 
 
 
-function Header( {  } ) {
+function Header() {
     const currentUser = useContext(UserContext)
 
     return (

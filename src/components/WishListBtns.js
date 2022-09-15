@@ -17,7 +17,7 @@ function WishListBtns({ handlePatch, book }) {
             currentUser.readList[book.id] = book
         }
         handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
-        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+        fetch(`https://json-server-template-production.up.railway.app/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
                 delete book.wishList[currentUser.id]

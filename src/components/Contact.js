@@ -5,7 +5,7 @@ function Contact() {
     const [boss, setBoss] = useState({})
 
     useEffect(() => {
-        fetch('https://book-wyrm-api.herokuapp.com/staff')
+        fetch('https://json-server-template-production.up.railway.app/staff')
             .then(r => r.json())
             .then(data => setBoss(data[0]))
     }, [])

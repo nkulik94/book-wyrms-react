@@ -28,7 +28,7 @@ function DetailedBook() {
             body: JSON.stringify(obj)
         }
 
-        fetch(`https://book-wyrm-api.herokuapp.com/${resource}`, config)
+        fetch(`https://json-server-template-production.up.railway.app/${resource}`, config)
         .then(r => r.json())
         .then(data => callback(data))
     }

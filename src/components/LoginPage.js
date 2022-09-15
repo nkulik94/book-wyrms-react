@@ -26,7 +26,7 @@ function Login( {allUsers} ) {
             setError(true)
             setTimeout(() => setError(false), 3000)
         } else {
-            fetch(`https://book-wyrm-api.herokuapp.com/users/${rightUser.id}`)
+            fetch(`https://json-server-template-production.up.railway.app/users/${rightUser.id}`)
                 .then(r => r.json())
                 .then(data => {
                     currentUser.setUser(data)

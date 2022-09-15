@@ -7,11 +7,11 @@ function FeaturedBook() {
     const [review, setReview] = useState(null);
 
     useEffect(() => {
-        fetch('https://book-wyrm-api.herokuapp.com/featured/1')
+        fetch('https://json-server-template-production.up.railway.app/featured/1')
             .then(r => r.json())
             .then(data => {
                 setReview(data.staffReview)
-                fetch(`https://book-wyrm-api.herokuapp.com/books/${data.bookWyrmsId}`)
+                fetch(`https://json-server-template-production.up.railway.app/books/${data.bookWyrmsId}`)
                     .then(r => r.json())
                     .then(book => setBookDetails(book))
             })

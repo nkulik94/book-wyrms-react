@@ -8,7 +8,7 @@ function UserListItems( { book } ) {
     const setBook = useContext(BookContext).setBook
 
     function handleSeeMore(id) {
-        fetch(`https://book-wyrm-api.herokuapp.com/books/${id}`)
+        fetch(`https://json-server-template-production.up.railway.app/books/${id}`)
             .then(r => r.json())
             .then(data => setBook(data))
     }
@@ -22,7 +22,7 @@ function UserListItems( { book } ) {
             body: JSON.stringify(obj)
         }
 
-        fetch(`https://book-wyrm-api.herokuapp.com/${resource}`, config)
+        fetch(`https://json-server-template-production.up.railway.app/${resource}`, config)
         .then(r => r.json())
         .then(data => callback(data))
     }

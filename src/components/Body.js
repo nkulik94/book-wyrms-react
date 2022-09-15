@@ -8,12 +8,11 @@ import Contact from "./Contact";
 import CreateAccount from "./CreateAccount";
 import Login from "./LoginPage";
 
-function Body( {  } ) {
-
+function Body() {
     const [allUsers, setUsers] = useState([])
 
     useEffect(() => {
-        fetch('https://book-wyrm-api.herokuapp.com/users')
+        fetch('https://json-server-template-production.up.railway.app/users')
             .then(r => r.json())
             .then(data => setUsers(data))
     }, [])

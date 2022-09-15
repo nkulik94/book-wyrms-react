@@ -20,7 +20,7 @@ function ReadListBtns( { book, handlePatch } ) {
     function handleDeleteReview() {
         delete currentUser.readList[book.id].review
         handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
-        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+        fetch(`https://json-server-template-production.up.railway.app/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
                 delete book.reviews[currentUser.id]
@@ -34,7 +34,7 @@ function ReadListBtns( { book, handlePatch } ) {
     function handleEditReview(newReview) {
         currentUser.readList[book.id].review = newReview
         handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
-        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+        fetch(`https://json-server-template-production.up.railway.app/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
                 book.reviews[currentUser.id].content = newReview
@@ -48,7 +48,7 @@ function ReadListBtns( { book, handlePatch } ) {
     function handleNewRate(e) {
         currentUser.readList[book.id].ownRating = parseInt(e.target.value, 10)
         handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
-        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+        fetch(`https://json-server-template-production.up.railway.app/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
                 book.rating.amount += 1
@@ -64,7 +64,7 @@ function ReadListBtns( { book, handlePatch } ) {
         const oldRating = currentUser.readList[book.id].ownRating
         currentUser.readList[book.id].ownRating = newRating
         handlePatch(currentUser, `users/${currentUser.id}`, setCurrentUser)
-        fetch(`https://book-wyrm-api.herokuapp.com/books/${book.id}`)
+        fetch(`https://json-server-template-production.up.railway.app/books/${book.id}`)
             .then(r => r.json())
             .then(book => {
                 book.rating.total += newRating - oldRating
